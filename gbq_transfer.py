@@ -1,16 +1,21 @@
 from google.cloud import bigquery
 import pandas as pd
 
-def df_to_gbq(df, table_id):
+def df_to_gbq(df, table_name):
 
     client = bigquery.Client()
+    table_id = "example-data-pipeline.gbq_test." + table_name
+    schema = []
 
-    # Specify "object" datatypes as "STRING" for bq schema
-    job_config = bigquery.LoadJobConfig(schema=[
-        bigquery.SchemaField("first_name", "STRING"),
-        bigquery.SchemaField("last_name", "STRING"),
-        bigquery.SchemaField("contact_no", "STRING")
-    ])
+    # Identify dataframe columns of a object (string) datatype
+    df_dtypes = df.dtypes
+    df_strings = df_dtypes[df_dtypes == 'object']
+    df_strings = df_strings.index.tolist()
+
+    # Specify bigquery "STRING" datatypes
+    for column in df_strings:
+        schema.append(bigquery.SchemaField(column, "STRING"))
+    job_config = bigquery.LoadJobConfig(schema=schema)
 
     # Load DataFrame in BigQuery
     job = client.load_table_from_dataframe(

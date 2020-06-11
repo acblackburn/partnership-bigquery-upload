@@ -1,3 +1,6 @@
 .ipynb_checkpoints/
 venv/
 group_metrics.xlsx
+.vscode/
+__pycache__/
+schema_test.py

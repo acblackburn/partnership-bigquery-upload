@@ -13,22 +13,24 @@ client = bigquery.Client()
 table_id = "example-data-pipeline.gbq_test.dashboard_test"
 schema = []
 
-# Identify dataframe columns of a object (string) datatype
+# Create Series of columns and datatypes.
 df_dtypes = new_df.dtypes
-df_strings = df_dtypes[df_dtypes == 'object']
-df_strings = df_strings.index.tolist()
 
-# Specify bigquery "STRING" datatypes
-for column in df_strings:
-    schema.append(bigquery.SchemaField(column, "STRING"))
+# Specify bigquery table schema
+for column, dtype in df_dtypes.items():
+    if dtype == "object":
+        schema.append(bigquery.SchemaField(column, "STRING"))
+    elif dtype == "int64":
+        schema.append(bigquery.SchemaField(column, "INTEGER"))
+    elif dtype == "float64":
+        schema.append(bigquery.SchemaField(column, "FLOAT"))
 job_config = bigquery.LoadJobConfig(schema=schema)
 
-dataset_ref = bigquery.dataset.DatasetReference("example-data-pipeline","gbq-test")
-table_ref = bigquery.table.TableReference(dataset_ref, "dashboard_test")
-table = bigquery.table.Table(table_ref)
+#dataset_ref = bigquery.dataset.DatasetReference("example-data-pipeline","gbq_test")
+#table_ref = bigquery.table.TableReference(dataset_ref, "dashboard_test")
+#table = bigquery.table.Table(table_ref, schema)
 
 # Load DataFrame into BigQuery
-job = client.insert_rows_from_dataframe(table, new_df)
+job = client.load_table_from_dataframe(new_df, table_id, job_config=job_config)
 
-# Wait for load job to complete
 job.result()

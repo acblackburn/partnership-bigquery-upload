@@ -26,10 +26,6 @@ for column, dtype in df_dtypes.items():
         schema.append(bigquery.SchemaField(column, "FLOAT"))
 job_config = bigquery.LoadJobConfig(schema=schema)
 
-#dataset_ref = bigquery.dataset.DatasetReference("example-data-pipeline","gbq_test")
-#table_ref = bigquery.table.TableReference(dataset_ref, "dashboard_test")
-#table = bigquery.table.Table(table_ref, schema)
-
 # Load DataFrame into BigQuery
 job = client.load_table_from_dataframe(new_df, table_id, job_config=job_config)
 

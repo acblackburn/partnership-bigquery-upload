@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "venv/bin/python",
-    "cSpell.words": [
-        "dtype",
-        "dtypes",
-        "tolist"
-    ]
-}

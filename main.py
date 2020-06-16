@@ -1,8 +1,9 @@
 import clean_functions as cf
-from gbq_transfer import df_to_gbq
+from gbq_transfer import df_to_gbq, event_file_info
 
-def main():
-
+def main(event, context):
+    file_path, file_name = event_file_info(event['name'])
+    
     # Clean group metrics data
     gm_df = cf.clean_groupmetrics("group_metrics.xlsx")
 

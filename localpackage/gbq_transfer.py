@@ -12,6 +12,8 @@ def df_to_gbq(df, dataset, table_name):
     for column, dtype in df_dtypes.items():
         if dtype == "object":
             schema.append(bigquery.SchemaField(column, "STRING"))
+        elif dtype == "datetime64[ns]":
+            schema.append(bigquery.SchemaField(column, "DATE"))
     job_config = bigquery.LoadJobConfig(schema=schema)
 
     # Load DataFrame in BigQuery

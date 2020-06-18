@@ -54,5 +54,3 @@ def clean_budget(input_file):
     df = df.sort_values("Date")
     
     return df
-
-

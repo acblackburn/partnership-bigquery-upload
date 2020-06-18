@@ -1,5 +1,5 @@
-import file_upload_clean as fc
-from gbq_transfer import df_to_gbq, event_file_info
+import localpackage.file_upload_clean as fc
+from localpackage.gbq_transfer import df_to_gbq, event_file_info
 
 def main(event, context):
     file_path, file_name = event_file_info(event['name'])
@@ -9,8 +9,6 @@ def main(event, context):
         df_to_gbq(budget_df, "Finance", "Budget")
     elif file_path == "eConsult":
         pass
-
-    # Delete original uploaded file
 
 """ def main():
     budget_df = fc.clean_budget("Budgetv1.csv")

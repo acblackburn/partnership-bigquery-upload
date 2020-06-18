@@ -1,14 +1,20 @@
-import clean_functions as cf
+import file_upload_clean as fc
 from gbq_transfer import df_to_gbq, event_file_info
-
+'''
 def main(event, context):
     file_path, file_name = event_file_info(event['name'])
     
-    # Clean group metrics data
-    gm_df = cf.clean_groupmetrics("group_metrics.xlsx")
+    if file_path == "Budget":
+        budget_df = fc.clean_budgetsheet(event)
+        df_to_gbq(budget_df, "Budget")
+    elif file_path == "eConsult":
+        pass
 
-    # load cleaned data to BigQuery
-    df_to_gbq(gm_df, "group_metrics_test")
+    # Delete original uploaded file
+'''
+def main():
+    budget_df = fc.clean_budget("Budgetv1.csv")
+    df_to_gbq(budget_df, "Budget")
 
 if __name__ == "__main__":
     main()

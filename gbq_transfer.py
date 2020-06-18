@@ -1,15 +1,10 @@
-from google.cloud import bigquery, storage
+from google.cloud import bigquery
 import pandas as pd
 import os
 
-def gcs_to_df(bucket_name):
-    storage_client = storage.Client()
-
-    blobs = storage_client.list_blobs(bucket_name)
-
 def df_to_gbq(df, table_name):
-    bq_client = bigquery.Client()
-    table_id = "example-data-pipeline.gbq_test." + table_name
+    bq_client = bigquery.Client(project="modality-dashboards")
+    table_id = "modality-dashboards.Dashboards." + table_name
     schema = []
 
     # Identify dataframe columns of a object (string) datatype

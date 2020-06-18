@@ -14,7 +14,8 @@ def main(event, context):
 '''
 def main():
     budget_df = fc.clean_budget("Budgetv1.csv")
-    df_to_gbq(budget_df, "Budget")
+    print(budget_df.head())
+    df_to_gbq(budget_df, "Finance", "Budget")
 
 if __name__ == "__main__":
     main()

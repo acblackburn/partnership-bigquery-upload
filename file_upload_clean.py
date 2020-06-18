@@ -13,8 +13,12 @@ def clean_groupmetrics(input_file):
     return df_new
 
 def clean_budget(input_file):
-    df = pd.read_csv(input_file, dtype = {'Year':'Int64'})
-
+    df = pd.read_csv(
+        input_file,
+        dtype={
+            'Year':'Int64',
+            'A/C Ref':'object'})
+    
     # Parse 'Date' column from 'Month' and 'Year' columns
     df['Date'] = df['Month'].str.strip() + "/" + df['Year'].astype(str)
     df['Date'] = pd.to_datetime(df['Date'], format="%B/%Y")
@@ -33,6 +37,21 @@ def clean_budget(input_file):
     for column in df.columns:
         if column not in required_columns:
               df.drop(column, axis=1)
+
+    df.rename(columns={
+        'Income / Expenses':'Income_Expenses',
+        'Period per 1000':'Period_1000',
+        'YTD per 1000':'YTD_1000',
+        'Divisional weighted List Size':'Divisional_Weighted_List_Size',
+        'Divisional raw List Size':'Divisional_raw_List_Size',
+        'YTD/practice weighted1000':'YTD_practice_weighted1000',
+        'YTD/practice raw 1000':'YTD_practice_raw_1000',
+        'YTD/Divisional weighted 1000':'YTD_Divisional_weighted_1000',
+        'YTD/Divisional raw 1000':'YTD_Divisional_raw_1000'
+    }, inplace=True)
+
+    df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
+    df = df.sort_values("Date")
     
     return df
 

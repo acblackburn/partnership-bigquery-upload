@@ -3,8 +3,8 @@ import pandas as pd
 import os
 
 def df_to_gbq(df, dataset, table_name):
-    bq_client = bigquery.Client(project="modality-dashboards")
-    table_id = "modality-dashboards." + dataset + "." + table_name
+    bq_client = bigquery.Client(project="modalitydashboards")
+    table_id = f"modalitydashboards.{dataset}.{table_name}"
     schema = []
 
     # Identify dataframe columns of a object (string) datatype

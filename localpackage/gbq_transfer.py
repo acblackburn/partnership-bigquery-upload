@@ -33,13 +33,6 @@ def df_to_gbq(df, dataset, table_name):
         bigquery.SchemaField("YTD_Divisional_raw_1000", "FLOAT")
     ]
 
-    # Identify dataframe columns of a object (string) datatype
-    """ df_dtypes = df.dtypes
-    for column, dtype in df_dtypes.items():
-        if dtype == "object":
-            schema.append(bigquery.SchemaField(column, "STRING"))
-        elif dtype == "datetime64[ns]":
-            schema.append(bigquery.SchemaField(column, "DATE")) """
     job_config = bigquery.LoadJobConfig(schema=schema)
 
     # Load DataFrame in BigQuery

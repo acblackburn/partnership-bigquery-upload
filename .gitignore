@@ -1,8 +1,5 @@
-.ipynb_checkpoints/
 venv/
-group_metrics.xlsx
 __pycache__/
-schema_test.py
 .vscode/
 .DS_Store
 *.csv

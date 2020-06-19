@@ -50,7 +50,7 @@ def clean_budget(input_file):
         'YTD/Divisional raw 1000':'YTD_Divisional_raw_1000'
     }, inplace=True)
 
-    df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
+    df.columns = df.columns.str.strip().str.replace(' ','_').str.replace('/','_')
     df = df.sort_values("Date")
-    
+
     return df

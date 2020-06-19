@@ -1,6 +1,7 @@
 from google.cloud import bigquery
 import pandas as pd
 import os
+import json
 
 def df_to_gbq(df, dataset, table_name):
     bq_client = bigquery.Client(project="modalitydashboards")

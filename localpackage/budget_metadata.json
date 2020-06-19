@@ -1,0 +1,18 @@
+{
+"budget": [
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "[NAME]",
+      "pd_dtype": "[TYPE]",
+      "bq_name": "[NAME]",
+      "bq_dtype": "[TYPE]"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "[NAME]",
+      "pd_dtype": "[TYPE]",
+      "bq_name": "[NAME]",
+      "bq_dtype": "[TYPE]"
+    }
+   ]
+}

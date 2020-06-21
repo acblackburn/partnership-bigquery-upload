@@ -3,12 +3,12 @@ from localpackage.gbq_transfer import df_to_gbq, event_file_info
 
 def main(event, context):
     file_path, file_name = event_file_info(event['name'])
-    print(file_name, file_path, event)
-    """ if file_path == "Budget":
-        budget_df = fc.clean_budget(event)
-        df_to_gbq(budget_df, "Finance", "Budget")
+
+    if file_path == "Budget":
+        budget_df = fc.clean_budget(event['name'])
+        df_to_gbq(budget_df, "Finance", "Budget_test")
     elif file_path == "eConsult":
-        pass """
+        pass
 
 """ def main():
     budget_df = fc.clean_budget("MODGRP - May 20 TB data.csv")

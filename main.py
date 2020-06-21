@@ -3,7 +3,7 @@ from localpackage.gbq_transfer import df_to_gbq, event_file_info
 
 def main(event, context):
     file_path, file_name = event_file_info(event['name'])
-    print(file_name, file_path)
+    print(file_name, file_path, event)
     """ if file_path == "Budget":
         budget_df = fc.clean_budget(event)
         df_to_gbq(budget_df, "Finance", "Budget")

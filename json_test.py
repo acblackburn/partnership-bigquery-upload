@@ -1,8 +1,8 @@
 import json
 
-json_file = open("budget_metadata.json")
-
+json_file = open("metadata.json")
 data = json.load(json_file)
+budget = data['budget']
 
-for i in data["budget"]:
-    print(i)
+for i in budget:
+    print(i['csv_name'])

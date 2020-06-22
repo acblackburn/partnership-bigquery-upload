@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import xlrd
+import json
 
 def clean_groupmetrics(input_file):
     df = pd.read_csv(input_file)
@@ -13,34 +14,18 @@ def clean_groupmetrics(input_file):
     return df_new
 
 def clean_budget(input_file):
-    df = pd.read_csv(
-        input_file,
-        dtype={
-            'Year':'object',
-            'Month':'object',
-            'Account':'object',
-            'A/C Ref':'object',
-            'CAT':'object',
-            'Reporting Code':'object',
-            'Reporting Description':'object',
-            'CC':'object',
-            'Dp':'object',
-            'YTD':'Float64',
-            'Income / Expenses':'object',
-            'List Size':'Int64',
-            'Period per 1000':'Float64',
-            'YTD per 1000':'Float64',
-            'Practice Weighted List Size':'Float64',
-            'Practice Raw List Size':'Float64',
-            'Divisional weighted List Size':'Float64',
-            'Divisional raw List Size':'Float64',
-            'YTD/practice weighted1000':'Float64',
-            'YTD/practice raw 1000':'Float64',
-            'YTD/Divisional weighted 1000':'Float64',
-            'YTD/Divisional raw 1000':'Float64'
-            },
-            na_values=' -   ',
-            thousands=',')
+    """Cleans monthly Budget csv file to specifications."""
+    # Open and load json metadata file
+    json_file = open("../metadata.json")
+    data = json.load(json_file)
+    budget_metadata = data['budget']
+    
+    pd_dtypes = {}
+    for entry in budget_metadata:
+        if entry['csv_name'] != None:
+            pd_dtypes[entry['csv_name']] = entry['pd_dtype']
+    
+    df = pd.read_csv(input_file, dtype=pd_dtypes, na_values=' -   ', thousands=',')
     
     # Parse 'Date' column from 'Month' and 'Year' columns
     df['Date'] = df['Month'].str.strip() + "/" + df['Year'].astype(str)
@@ -83,4 +68,6 @@ def clean_budget(input_file):
     df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
     df = df.sort_values("Date")
 
+    json_file.close()
+    
     return df

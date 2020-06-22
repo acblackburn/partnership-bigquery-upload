@@ -1,11 +1,8 @@
 import localpackage.file_upload_clean as fc
 from localpackage.gbq_transfer import df_to_gbq, event_file_info
-from google.cloud import storage
 
 def main(data, context):
     file_path, file_name = event_file_info(data['name'])
-
-    client = storage.Client(project='modalitydashboards')
 
     if file_path == "Budget":
         budget_df = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
@@ -14,8 +11,8 @@ def main(data, context):
         pass
 
 """ def main():
-    budget_df = fc.clean_budget("MODGRP - May 20 TB data.csv")
-    df_to_gbq(budget_df, "Finance", "Budget")
+    budget_df = fc.clean_budget("gs://dashboards_data_upload/Budget/Budgetv1.csv")
+    df_to_gbq(budget_df, "Finance", "Budget_test")
 
 if __name__ == "__main__":
     main() """

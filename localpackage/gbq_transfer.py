@@ -1,4 +1,4 @@
-from google.cloud import bigquery
+from google.cloud import bigquery, storage
 import pandas as pd
 import os
 import json
@@ -47,3 +47,13 @@ def df_to_gbq(df, dataset, table_name):
 def event_file_info(string):
     path, filename = os.path.split(string)
     return (path, filename)
+
+def delete_blob(bucket_name, blob_name):
+    """Deletes a blob (file) from a bucket."""
+    storage_client = storage.Client()
+
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    blob.delete()
+
+    print(f"{blob_name} deleted.")

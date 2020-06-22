@@ -6,13 +6,6 @@ def main(data, context):
 
     if file_path == "Budget":
         budget_df = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
-        df_to_gbq(budget_df, "Finance", "Budget_test")
+        df_to_gbq(budget_df, "Finance", "Budget")
     elif file_path == "eConsult":
         pass
-
-""" def main():
-    budget_df = fc.clean_budget("gs://dashboards_data_upload/Budget/Budgetv1.csv")
-    df_to_gbq(budget_df, "Finance", "Budget_test")
-
-if __name__ == "__main__":
-    main() """

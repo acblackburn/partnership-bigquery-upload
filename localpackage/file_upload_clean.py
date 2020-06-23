@@ -43,9 +43,13 @@ def clean_budget(input_file):
 
     df.rename(columns=columns_rename, inplace=True)
 
-    df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
-    df = df.sort_values("Date")
-
+    # df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
+    # df = df.sort_values('Date')
+    print(df.columns)
+    print(df.head())
     json_file.close()
     
     return df
+
+df_test = clean_budget("Budgetv1.csv")
+print(df_test)

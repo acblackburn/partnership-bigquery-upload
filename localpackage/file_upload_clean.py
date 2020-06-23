@@ -7,7 +7,7 @@ def clean_budget(input_file):
     """Cleans monthly Budget csv file."""
 
     # Open and load json metadata file
-    json_file = open("../metadata.json")
+    json_file = open("metadata.json")
     data = json.load(json_file)
     budget_metadata = data['budget']
     
@@ -32,24 +32,19 @@ def clean_budget(input_file):
     df['Dp'] = df['Dp'].str.upper()
     df['CC'] = df['CC'].str.upper()
 
-    required_columns = [entry['csv_name'] for entry in budget_metadata if entry['csv_name'] != None]
+    # Rename columns from csv_name to bq_name
+    columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}
+    df.rename(columns=columns_rename, inplace=True)
+
+    # Create list of required columns that appear in metadata.json
+    required_columns = [entry['bq_name'] for entry in budget_metadata]
     
     for column in df.columns:
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
-    # TODO redo this section using json file. Copy pd_dtypes process (or a better way)
-    columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}
-
-    df.rename(columns=columns_rename, inplace=True)
-
     # df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
-    # df = df.sort_values('Date')
-    print(df.columns)
-    print(df.head())
+    df = df.sort_values('Date', ignore_index=True)
     json_file.close()
     
     return df
-
-df_test = clean_budget("Budgetv1.csv")
-print(df_test)

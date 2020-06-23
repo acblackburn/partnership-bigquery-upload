@@ -11,6 +11,7 @@ def clean_budget(input_file):
     data = json.load(json_file)
     budget_metadata = data['budget']
     
+    #Create dictioary for the panda type that the excel file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
     
     df = pd.read_csv(

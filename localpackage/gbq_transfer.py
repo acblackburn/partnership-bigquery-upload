@@ -7,6 +7,7 @@ def df_to_gbq(df, dataset, table_name):
     bq_client = bigquery.Client(project="modalitydashboards")
     table_id = f"modalitydashboards.{dataset}.{table_name}"
     
+    # TODO redo this section using json file
     schema = [
         bigquery.SchemaField("Year", "STRING"),
         bigquery.SchemaField("Month", "STRING"),

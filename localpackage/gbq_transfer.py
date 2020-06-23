@@ -4,6 +4,7 @@ import os
 import json
 
 def df_to_gbq(df, dataset, table_name):
+    """Load a pandas DataFrame into a specified BigQuery table."""
     bq_client = bigquery.Client(project="modalitydashboards")
     table_id = f"modalitydashboards.{dataset}.{table_name}"
 
@@ -12,7 +13,7 @@ def df_to_gbq(df, dataset, table_name):
     data = json.load(json_file)
     budget_metadata = data['budget']
     
-    # Create bq schema from json metadata 
+    # Create BigQuery schema from json metadata 
     schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in budget_metadata]
 
     job_config = bigquery.LoadJobConfig(schema=schema)
@@ -26,7 +27,8 @@ def df_to_gbq(df, dataset, table_name):
     job.result()
     json_file.close()
 
-def event_file_info(string):
+def data_file_info(string):
+    """Split file uploaded to google cloud bucket into a filepath and filename."""
     path, filename = os.path.split(string)
     return (path, filename)
 

@@ -8,12 +8,12 @@ def df_to_gbq(df, dataset, table_name):
     table_id = f"modalitydashboards.{dataset}.{table_name}"
 
     # Open and load json metadata file
-    json_file = open("../metadata.json")
+    json_file = open("metadata.json")
     data = json.load(json_file)
     budget_metadata = data['budget']
     
     # Create bq schema from json metadata 
-    schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in budget]
+    schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in budget_metadata]
 
     job_config = bigquery.LoadJobConfig(schema=schema)
 

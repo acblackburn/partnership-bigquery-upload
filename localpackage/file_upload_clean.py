@@ -11,10 +11,7 @@ def clean_budget(input_file):
     data = json.load(json_file)
     budget_metadata = data['budget']
     
-    pd_dtypes = {}
-    for entry in budget_metadata:
-        if entry['csv_name'] != None:
-            pd_dtypes[entry['csv_name']] = entry['pd_dtype']
+    pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
     
     df = pd.read_csv(
         input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
@@ -41,17 +38,9 @@ def clean_budget(input_file):
               df = df.drop(column, axis=1)
 
     # TODO redo this section using json file. Copy pd_dtypes process (or a better way)
-    df.rename(columns={
-        'Income / Expenses':'Income_Expenses',
-        'Period per 1000':'Period_1000',
-        'YTD per 1000':'YTD_1000',
-        'Divisional weighted List Size':'Divisional_Weighted_List_Size',
-        'Divisional raw List Size':'Divisional_raw_List_Size',
-        'YTD/practice weighted1000':'YTD_practice_weighted1000',
-        'YTD/practice raw 1000':'YTD_practice_raw_1000',
-        'YTD/Divisional weighted 1000':'YTD_Divisional_weighted_1000',
-        'YTD/Divisional raw 1000':'YTD_Divisional_raw_1000'
-    }, inplace=True)
+    columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}
+
+    df.rename(columns=columns_rename, inplace=True)
 
     df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
     df = df.sort_values("Date")

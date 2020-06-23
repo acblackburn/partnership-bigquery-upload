@@ -6,6 +6,16 @@ import json
 def df_to_gbq(df, dataset, table_name):
     bq_client = bigquery.Client(project="modalitydashboards")
     table_id = f"modalitydashboards.{dataset}.{table_name}"
+
+    # Open and load json metadata file
+    json_file = open("../metadata.json")
+    data = json.load(json_file)
+    budget_metadata = data['budget']
+    
+    schema = []
+    for entry in budget_metadata:
+        list_append = bigquery.ShemaField(entry['bq_name'],entry['bq_dtype'])
+        schema.append(list_append)
     
     # TODO redo this section using json file
     schema = [

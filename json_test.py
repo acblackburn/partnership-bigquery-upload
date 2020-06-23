@@ -1,4 +1,5 @@
 import json
+from google.cloud import bigquery
 
 json_file = open("metadata.json")
 data = json.load(json_file)
@@ -15,3 +16,10 @@ required_columns = [entry['csv_name'] for entry in budget if entry['csv_name'] !
 'YTD/Divisional weighted 1000', 'YTD/Divisional raw 1000'] """
 
 print(required_columns)
+
+for entry in budget:
+    if entry['bq_name'] != None:
+        list_append = bigquery.SchemaField(entry['bq_name'], entry['bq_dtype'])
+        schema.append(list_append)
+
+    

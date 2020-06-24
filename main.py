@@ -1,8 +1,8 @@
 import localpackage.file_upload_clean as fc
-from localpackage.gbq_transfer import df_to_gbq, event_file_info, delete_blob
+from localpackage.gbq_transfer import df_to_gbq, data_file_info, delete_blob
 
 def main(data, context):
-    file_path, file_name = event_file_info(data['name'])
+    file_path, file_name = data_file_info(data['name'])
 
     if file_path == "Budget":
         budget_df = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")

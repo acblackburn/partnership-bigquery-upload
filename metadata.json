@@ -168,5 +168,193 @@
       "bq_name": "MonthNumeric",
       "bq_dtype": "STRING"
     }
-   ]
+   ],
+
+"practice_lut": [
+  
+    {
+      "ODS Code":"M88013",
+      "DIV":"BIR",
+      "practice_code":"BCF"
+    }, 
+    {
+      "ODS Code":"M85124",
+      "DIV":"BIR",
+      "practice_code":"BEL"
+    }, 
+    {
+      "ODS Code":"G85124",
+      "DIV":"LEW",
+      "practice_code":"BGS"
+    }, 
+    {
+      "ODS Code":"H81037",
+      "DIV":"SUR",
+      "practice_code":"BMP"
+    }, 
+    {
+      "ODS Code":"K81638",
+      "DIV":"WOK",
+      "practice_code":"BUR"
+    }, 
+    {
+      "ODS Code":"H82040",
+      "DIV":"SUS",
+      "practice_code":"CHD"
+    }, 
+    {
+      "ODS Code":"B82020",
+      "DIV":"AWC",
+      "practice_code":"CRS"
+    }, 
+    {
+      "ODS Code":"M85178",
+      "DIV":"BIR",
+      "practice_code":"ENK"
+    },
+    {
+      "ODS Code":"B83021",
+      "DIV":"AWC",
+      "practice_code":"FAR"
+    },
+    {
+      "ODS Code":"B82028",
+      "DIV":"AWC",
+      "practice_code":"FIS"
+    },
+    {
+      "ODS Code":"M85002",
+      "DIV":"BIR",
+      "practice_code":"HWM"
+    },
+    {
+      "ODS Code":"B83027",
+      "DIV":"AWC",
+      "practice_code":"HAW"
+    },
+    {
+      "ODS Code":"M85016",
+      "DIV":"BIR",
+      "practice_code":"HIL"
+    },
+    {
+      "ODS Code":"B83023",
+      "DIV":"AWC",
+      "practice_code":"HOL"
+    },
+    {
+      "ODS Code":"G85004",
+      "DIV":"LEW",
+      "practice_code":"JEN"
+    },
+    {
+      "ODS Code":"H82010",
+      "DIV":"SUS",
+      "practice_code":"JCS"
+    },
+    {
+      "ODS Code":"B83033",
+      "DIV":"AWC",
+      "practice_code":"KIL"
+    },
+    {
+      "ODS Code":"M85069",
+      "DIV":"BIR",
+      "practice_code":"LPH"
+    },
+    {
+      "ODS Code":"M91028",
+      "DIV":"WAL",
+      "practice_code":"BER"
+    },
+    {"ODS Code":"M91032",
+      "DIV":"WAL",
+      "practice_code":"COL"
+    },
+    {
+      "ODS Code":"M91660",
+      "DIV":"WAL",
+      "practice_code":"VAI"
+    },
+    {
+      "ODS Code":"M91613",
+      "DIV":"WAL",
+      "practice_code":"FOR"
+    },
+    {
+      "ODS Code":"Y02627",
+      "DIV":"WAL",
+      "practice_code":"HAR"
+    },
+    {
+      "ODS Code":"B81048",
+      "DIV":"HUL",
+      "practice_code":"NEL"
+    },
+    {
+      "ODS Code":"M91016",
+      "DIV":"WAL",
+      "practice_code":"NIN"
+    },
+    {
+      "ODS Code":"B83061",
+      "DIV":"AWC",
+      "practice_code":"OAK"
+    },
+    {
+      "ODS Code":"H82621",
+      "DIV":"SUS",
+      "practice_code":"PVH"
+    },
+    {
+      "ODS Code":"M91616",
+      "DIV":"WAL",
+      "practice_code":"PLE"
+    },
+    {
+      "ODS Code":"H82008",
+      "DIV":"SUS",
+      "practice_code":"SHI"
+    },
+    {
+      "ODS Code":"B83006",
+      "DIV":"AWC",
+      "practice_code":"SIL"
+    }, 
+    {
+      "ODS Code":"H81638",
+      "DIV":"SUR",
+      "practice_code":"SMA"
+    },
+    {
+      "ODS Code":"M88002",
+      "DIV":"BIR",
+      "practice_code":"SMC"
+    },
+    {
+      "ODS Code":"G85005",
+      "DIV":"LEW",
+      "practice_code":"SLG"
+    },
+    {
+      "ODS Code":"M91007",
+      "DIV":"WAL",
+      "practice_code":"SJO"
+    },
+    {
+      "ODS Code":"Y02626",
+      "DIV":"WAL",
+      "practice_code":"KEY"
+    },
+    {
+      "ODS Code":"H81060",
+      "DIV":"SUR",
+      "practice_code":"TMP"
+    },
+    {
+      "ODS Code":"K81022",
+      "DIV":"WOK",
+      "practice_code":"WOK"
+    }
+  ]
 }

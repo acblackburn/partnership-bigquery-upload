@@ -9,4 +9,8 @@ def main(data, context):
         df_to_gbq(budget_df, "Finance", "Budget_test")
         delete_blob(data['bucket'], data['name'])
     elif file_path == "eConsult":
+        # usage_df, reason_df = fc.clean_consultations(f"gs://{data['bucket']}/{data['name']}")
+        # df_to_gbq(usage_df, "Consultations", "Usage")
+        # df_to_gbq(reason_df, "Consultations", "Reason")
+        # delete_blob(data['bucket'], data['name'])
         pass

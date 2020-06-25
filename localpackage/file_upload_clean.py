@@ -25,9 +25,6 @@ def clean_budget(input_file):
     # Create a numerical month column from the above created date column
     df['MonthNumeric'] = df['Date'].dt.strftime("%m")
 
-    # Remove leading and trailing spaces from column headers
-    # df.columns = df.columns.str.strip()
-
     # Make sure Division and CC columns are in uppercase format
     df['Dp'] = df['Dp'].str.upper()
     df['CC'] = df['CC'].str.upper()
@@ -48,9 +45,6 @@ def clean_budget(input_file):
     json_file.close()
     
     return df
-
-test_df = clean_budget('Budgetv1.xlsx')
-print(test_df.dtypes)
 
 def consultations_clean(input_file):
     # Crete df_usage and df_reason

@@ -14,7 +14,7 @@ def clean_budget(input_file):
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
     
-    df = pd.read_csv(
+    df = pd.read_excel(
         input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
         )
     
@@ -26,7 +26,7 @@ def clean_budget(input_file):
     df['MonthNumeric'] = df['Date'].dt.strftime("%m")
 
     # Remove leading and trailing spaces from column headers
-    df.columns = df.columns.str.strip()
+    # df.columns = df.columns.str.strip()
 
     # Make sure Division and CC columns are in uppercase format
     df['Dp'] = df['Dp'].str.upper()
@@ -48,6 +48,9 @@ def clean_budget(input_file):
     json_file.close()
     
     return df
+
+test_df = clean_budget('Budgetv1.xlsx')
+print(test_df.dtypes)
 
 def consultations_clean(input_file):
     # Crete df_usage and df_reason

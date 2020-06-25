@@ -9,7 +9,7 @@ def clean_budget(input_file):
     # Open and load json metadata file
     json_file = open("metadata.json")
     data = json.load(json_file)
-    budget_metadata = data['budget']
+    budget_metadata = data['Budget']
     
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
@@ -48,3 +48,8 @@ def clean_budget(input_file):
     json_file.close()
     
     return df
+
+def consultations_clean(input_file):
+    # Crete df_usage and df_reason
+    # Clean both dataframes like in notebook example
+    return usage_df, reason_df

@@ -69,11 +69,17 @@ def consultations_clean(input_file):
     json_file = open("metadata.json")
     data = json.load(json_file)
     practice_lut = data['practice_lut']
+    usage_metadata = data['Usage']
+    reason_metadata = data['Reason']
 
+     # Create dictionary for the panda type that the excel/csv file should be loaded as
+    pd_dtypes_usage = {entry['csv_name']:entry['pd_dtype'] for entry in usage_metadata if entry['csv_name'] != None}
+    pd_dtypes_reason = {entry['csv_name']:entry['pd_dtype'] for entry in reason_metadata if entry['csv_name'] != None}
+    
     #read in data
-    usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21)
-    reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults')
-    e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE')
+    usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
+    reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults', dtype=pd_dtypes_reason)
+    e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', dtype={'List Size':"Int64"})
 
     #look up table for list size created from NHSE df
     list_size_lookuptable = {row[0]:row[3] for index,row in e_consult_nhse.iterrows()}
@@ -101,29 +107,29 @@ def consultations_clean(input_file):
     reason_df['Code'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lut})
 
     #To add list size to reason dataframe
-    reason_df['List Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
+    reason_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
     
     #To add divisional list size to reason dataframe
-    reason_df['Div List'] = reason_df['DIV'].apply(lambda x: division_list_size_lut[x])
+    reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: division_list_size_lut[x])
 
     #To add age bracket to reason datafram
-    reason_df['Age Bracket'] = reason_df['Age'].apply(age_bracket)
+    reason_df['Age_Bracket'] = reason_df['Age'].apply(age_bracket)
     
     #reason per 1000 divisonal size
-    reason_df['eConsult reason per 1000'] = 1000 / reason_df['Div List']
+    reason_df['eConsult_1000_division'] = 1000 / reason_df['Div_List']
 
     #reson per 1000 practice list size
-    reason_df['eConsult per 1000 practice'] = 1000 / reason_df['List Size']
+    reason_df['eConsult_1000_practice'] = 1000 / reason_df['List_Size']
 
     #Add singular month to df
     reason_df['Month'] = reason_df['Date'].apply(lambda x: x.strftime("%B"))
 
     #Data for usage df
     #To add list size to usage df
-    usage_df['List Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
+    usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
 
     #eConsults submitted per 1000 practice list size
-    usage_df['eConsults submitted per 1000'] =(usage_df['eConsults submitted']/usage_df['List Size'])*1000
+    usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
     
     #Month is input as the date on the first of the month
     day = "01"
@@ -134,12 +140,12 @@ def consultations_clean(input_file):
     usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
 
     #Emiss or S1
-    usage_df['EMIS/ S1'] = 'EMIS'
+    usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMISS/S1'] for entry in practice_lut})
 
     reason_df = reason_df.drop('ODS Code', axis=1)
     usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
     #close json_file
     json_file.close()
-
     return usage_df, reason_df
+consultations_clean("eConsult.xlsx")

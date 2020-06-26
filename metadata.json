@@ -169,192 +169,543 @@
       "bq_dtype": "STRING"
     }
    ],
+"Reason":[
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "DIV",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Code",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "ODS Code",
+    "pd_dtype": "str",
+    "bq_name": null,
+    "bq_dtype": null
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Practice",
+    "pd_dtype": "str",
+    "bq_name": "Practice",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "List_Size",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Div_List",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Consult",
+    "pd_dtype": "str",
+    "bq_name": "Consult",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Date",
+    "pd_dtype": "datetime64",
+    "bq_name": "Date",
+    "bq_dtype": "DATE"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Month",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Time",
+    "pd_dtype": "datetime64",
+    "bq_name": "Time",
+    "bq_dtype": "TIME"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Day of week",
+    "pd_dtype": "datetime64",
+    "bq_name": "Day_of_week",
+    "bq_dtype": "DATE"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Age",
+    "pd_dtype": "Int64",
+    "bq_name": "Age",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Gender",
+    "pd_dtype": "str",
+    "bq_name": "Gender",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Diverted",
+    "pd_dtype": "str",
+    "bq_name": "Diverted",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Source",
+    "pd_dtype": "str",
+    "bq_name": "Source",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "PracticeID",
+    "pd_dtype": "str",
+    "bq_name": "PractcieID",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Diverted Reason",
+    "pd_dtype": "str",
+    "bq_name": "Diverted_Reason",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "PracticeID",
+    "pd_dtype": "str",
+    "bq_name": "PractcieID",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Age_Bracket",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "eConsult_1000_practice",
+    "bq_dtype": "FLOAT"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "eConsult_1000_division",
+    "bq_dtype": "FLOAT"
+  }
+],
+
+"Usage": [
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "ODS Code",
+    "pd_dtype": "str",
+    "bq_name": null,
+    "bq_dtype": null
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Practice Id",
+    "pd_dtype": "str",
+    "bq_name": null,
+    "bq_dtype": null
+  },
+  {"description": "[DESCRIPTION]",
+  "csv_name": "Practice Type",
+  "pd_dtype": "str",
+  "bq_name": null,
+  "bq_dtype": null
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Month",
+    "bq_dtype": "DATE"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Practice",
+    "pd_dtype": "str",
+    "bq_name": "Practice",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "Code",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "DIV",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "EMIS_S1",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "List_Size",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "URL",
+    "pd_dtype": "str",
+    "bq_name": "URL",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "eConsult URL",
+    "pd_dtype": "str",
+    "bq_name": "eConuslt_URL",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "CCG",
+    "pd_dtype": "str",
+    "bq_name": "CCG",
+    "bq_dtype": "STRING"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Unique visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Unique_visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Self-help visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Self_help_visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Pharmacy self-help visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Pharmacy_self_help_visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Callback provider visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Callback_provider_visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Local service visits",
+    "pd_dtype": "Int64",
+    "bq_name": "Local_service_visits",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "eConsults submitted",
+    "pd_dtype": "Int64",
+    "bq_name": "eConsults_submitted",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "eConsults diverted",
+    "pd_dtype": "Int64",
+    "bq_name": "eConsult_diverted",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Attempts to save appointment",
+    "pd_dtype": "Int64",
+    "bq_name": "Attempts_to_save_appointments",
+    "bq_dtype": "INTEGER"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": "Estimated appointments saved",
+    "pd_dtype": "Float64",
+    "bq_name": "Estimated_appointments_saved",
+    "bq_dtype": "FLOAT"
+  },
+  {
+    "description": "[DESCRIPTION]",
+    "csv_name": null,
+    "pd_dtype": null,
+    "bq_name": "eConsults_submitted_1000",
+    "bq_dtype": "FLOAT"
+  }
+],
+
 
 "practice_lut": [
   
     {
       "ODS Code":"M88013",
       "DIV":"BIR",
-      "practice_code":"BCF"
+      "practice_code":"BCF",
+      "EMISS/S1":"S1"
     }, 
     {
       "ODS Code":"M85124",
       "DIV":"BIR",
-      "practice_code":"BEL"
+      "practice_code":"BEL",
+      "EMISS/S1":"S1"
+      
     }, 
     {
       "ODS Code":"G85124",
       "DIV":"LEW",
-      "practice_code":"BGS"
+      "practice_code":"BGS",
+      "EMISS/S1":"EMIS"
     }, 
     {
       "ODS Code":"H81037",
       "DIV":"SUR",
-      "practice_code":"BMP"
+      "practice_code":"BMP",
+      "EMISS/S1":"EMIS"
     }, 
     {
       "ODS Code":"K81638",
       "DIV":"WOK",
-      "practice_code":"BUR"
+      "practice_code":"BUR",
+      "EMISS/S1":"EMIS"
     }, 
     {
       "ODS Code":"H82040",
       "DIV":"SUS",
-      "practice_code":"CHD"
+      "practice_code":"CHD",
+      "EMISS/S1":"EMIS"
     }, 
     {
       "ODS Code":"B82020",
       "DIV":"AWC",
-      "practice_code":"CRS"
+      "practice_code":"CRS",
+      "EMISS/S1":"S1"
     }, 
     {
       "ODS Code":"M85178",
       "DIV":"BIR",
-      "practice_code":"ENK"
+      "practice_code":"ENK",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"B83021",
       "DIV":"AWC",
-      "practice_code":"FAR"
+      "practice_code":"FAR",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"B82028",
       "DIV":"AWC",
-      "practice_code":"FIS"
+      "practice_code":"FIS",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"M85002",
       "DIV":"BIR",
-      "practice_code":"HWM"
+      "practice_code":"HWM",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"B83027",
       "DIV":"AWC",
-      "practice_code":"HAW"
+      "practice_code":"HAW",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"M85016",
       "DIV":"BIR",
-      "practice_code":"HIL"
+      "practice_code":"HIL",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"B83023",
       "DIV":"AWC",
-      "practice_code":"HOL"
+      "practice_code":"HOL",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"G85004",
       "DIV":"LEW",
-      "practice_code":"JEN"
+      "practice_code":"JEN",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"H82010",
       "DIV":"SUS",
-      "practice_code":"JCS"
+      "practice_code":"JCS",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"B83033",
       "DIV":"AWC",
-      "practice_code":"KIL"
+      "practice_code":"KIL",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"M85069",
       "DIV":"BIR",
-      "practice_code":"LPH"
+      "practice_code":"LPH",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"M91028",
       "DIV":"WAL",
-      "practice_code":"BER"
+      "practice_code":"BER",
+      "EMISS/S1":"EMIS"
     },
     {"ODS Code":"M91032",
       "DIV":"WAL",
-      "practice_code":"COL"
+      "practice_code":"COL",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"M91660",
       "DIV":"WAL",
-      "practice_code":"VAI"
+      "practice_code":"VAI",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"M91613",
       "DIV":"WAL",
-      "practice_code":"FOR"
+      "practice_code":"FOR",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"Y02627",
       "DIV":"WAL",
-      "practice_code":"HAR"
+      "practice_code":"HAR",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"B81048",
       "DIV":"HUL",
-      "practice_code":"NEL"
+      "practice_code":"NEL",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"M91016",
       "DIV":"WAL",
-      "practice_code":"NIN"
+      "practice_code":"NIN",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"B83061",
       "DIV":"AWC",
-      "practice_code":"OAK"
+      "practice_code":"OAK",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"H82621",
       "DIV":"SUS",
-      "practice_code":"PVH"
+      "practice_code":"PVH",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"M91616",
       "DIV":"WAL",
-      "practice_code":"PLE"
+      "practice_code":"PLE",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"H82008",
       "DIV":"SUS",
-      "practice_code":"SHI"
+      "practice_code":"SHI",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"B83006",
       "DIV":"AWC",
-      "practice_code":"SIL"
+      "practice_code":"SIL",
+      "EMISS/S1":"S1"
     }, 
     {
       "ODS Code":"H81638",
       "DIV":"SUR",
-      "practice_code":"SMA"
+      "practice_code":"SMA",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"M88002",
       "DIV":"BIR",
-      "practice_code":"SMC"
+      "practice_code":"SMC",
+      "EMISS/S1":"S1"
     },
     {
       "ODS Code":"G85005",
       "DIV":"LEW",
-      "practice_code":"SLG"
+      "practice_code":"SLG",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"M91007",
       "DIV":"WAL",
-      "practice_code":"SJO"
+      "practice_code":"SJO",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"Y02626",
       "DIV":"WAL",
-      "practice_code":"KEY"
+      "practice_code":"KEY",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"H81060",
       "DIV":"SUR",
-      "practice_code":"TMP"
+      "practice_code":"TMP",
+      "EMISS/S1":"EMIS"
     },
     {
       "ODS Code":"K81022",
       "DIV":"WOK",
-      "practice_code":"WOK"
+      "practice_code":"WOK",
+      "EMISS/S1":"EMIS"
     }
   ]
 }

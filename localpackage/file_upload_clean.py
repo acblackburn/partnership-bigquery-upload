@@ -64,12 +64,13 @@ def age_bracket(int):
     else: return "70+"
 
 def consultations_clean(input_file):
+    '''Cleans eConsult data. File to be uploaded weekly '''
 
     # Open and load json metadata file
     json_file = open("metadata.json")
-    json_practcie_lut = (pen("practice_lut.json")
+    json_practice_lut = open("practice_lut.json")
     data = json.load(json_file)
-    data_practcie_lut = json.load(json_pratcice_lut)
+    data_practice_lut = json.load(json_practice_lut)
     practice_lut = data_practice_lut['practice_lut']
     usage_metadata = data['Usage']
     reason_metadata = data['Reason']
@@ -127,6 +128,9 @@ def consultations_clean(input_file):
     #Add singular month to df
     reason_df['Month'] = reason_df['Date'].apply(lambda x: x.strftime("%B"))
 
+    #Fill reson diverted null values with No (N)
+    reason_df['Diverted Reason'] = reason_df['Diverted Reason'].fillna("N")
+
     #Data for usage df
     #To add list size to usage df
     usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
@@ -143,21 +147,24 @@ def consultations_clean(input_file):
     usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
 
     #Emiss or S1
-    usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMISS/S1'] for entry in practice_lut})
+    usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lut})
 
     #Drop unused columns
     reason_df = reason_df.drop('ODS Code', axis=1)
     usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
     #Rename columns for BQ
+    #reason
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in reason_metadata}
     reason_df.rename(columns=columns_rename, inplace=True)
 
+    #usage
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=columns_rename, inplace=True)
+
     #close json_file
     json_file.close()
-    data_practcie_lut.close()
+    json_practice_lut.close()
 
     return usage_df, reason_df
 consultations_clean("eConsult.xlsx")

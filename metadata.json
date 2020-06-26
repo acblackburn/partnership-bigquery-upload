@@ -71,93 +71,158 @@
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[Income or expense]",
       "csv_name": "Income / Expenses",
       "pd_dtype": "str",
       "bq_name": "Income_Expenses",
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[List Size]",
       "csv_name": "List Size",
       "pd_dtype": "Int64",
       "bq_name": "List_Size",
       "bq_dtype": "INTEGER"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[Period per 1000 patient from List Size]",
       "csv_name": "Period per 1000",
       "pd_dtype": "Float64",
       "bq_name": "Period_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[Year to date per 1000 patient from List Size]",
       "csv_name": "YTD per 1000",
       "pd_dtype": "Float64",
       "bq_name": "YTD_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[List Size for the practice in weighted form]",
       "csv_name": "Practice Weighted List Size",
       "pd_dtype": "Float64",
       "bq_name": "Period_Weighted_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[List Size for the practice in raw form]",
       "csv_name": "Practice Raw List Size",
       "pd_dtype": "Float64",
       "bq_name": "Practice_Raw_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[List Size for the division in weighted form]",
       "csv_name": "Divisional weighted List Size",
       "pd_dtype": "Float64",
       "bq_name": "Divisional_Weighted_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[List Size for the division in raw form]",
       "csv_name": "Divisional raw List Size",
       "pd_dtype": "Float64",
       "bq_name": "Divisional_raw_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[The year to date scaled by the WEIGHTED list size of the practice per 1000 patient]",
       "csv_name": "YTD/practice weighted1000",
       "pd_dtype": "Float64",
       "bq_name": "YTD_practice_weighted1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[The year to date scaled by the list size of the practice per 1000 patient]",
       "csv_name": "YTD/practice raw 1000",
       "pd_dtype": "Float64",
       "bq_name": "YTD_practice_raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[The year to date scaled by the WEIGHTED list size of the division per 1000 patient]",
       "csv_name": "YTD/Divisional weighted 1000",
       "pd_dtype": "Float64",
       "bq_name": "YTD_Divisional_weighted_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "[The year to date scaled by the list size of the division per 1000 patient]",
       "csv_name": "YTD/Divisional raw 1000",
       "pd_dtype": "Float64",
       "bq_name": "YTD_Divisional_raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
+      "description": "[The date of the budget]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Date",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[The numeric value of the month. Not including year e.g. (January = 1)]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "MonthNumeric",
+      "bq_dtype": "STRING"
+    }
+   ],
+  "Reason":[
+    {
       "description": "[DESCRIPTION]",
       "csv_name": null,
       "pd_dtype": null,
+      "bq_name": "DIV",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Code",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "ODS Code",
+      "pd_dtype": "str",
+      "bq_name": null,
+      "bq_dtype": null
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Practice",
+      "pd_dtype": "str",
+      "bq_name": "Practice",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "List_Size",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Div_List",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Consult",
+      "pd_dtype": "str",
+      "bq_name": "Consult",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Date",
+      "pd_dtype": "datetime64",
       "bq_name": "Date",
       "bq_dtype": "DATE"
     },
@@ -165,320 +230,255 @@
       "description": "[DESCRIPTION]",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "MonthNumeric",
+      "bq_name": "Month",
       "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Time",
+      "pd_dtype": "datetime64",
+      "bq_name": "Time",
+      "bq_dtype": "TIME"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Day of week",
+      "pd_dtype": "datetime64",
+      "bq_name": "Day_of_week",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Age",
+      "pd_dtype": "Int64",
+      "bq_name": "Age",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Gender",
+      "pd_dtype": "str",
+      "bq_name": "Gender",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Diverted",
+      "pd_dtype": "str",
+      "bq_name": "Diverted",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Source",
+      "pd_dtype": "str",
+      "bq_name": "Source",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "PracticeID",
+      "pd_dtype": "str",
+      "bq_name": "PractcieID",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Diverted Reason",
+      "pd_dtype": "str",
+      "bq_name": "Diverted_Reason",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "PracticeID",
+      "pd_dtype": "str",
+      "bq_name": "PractcieID",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Age_Bracket",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "eConsult_1000_practice",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "eConsult_1000_division",
+      "bq_dtype": "FLOAT"
     }
-   ],
-"Reason":[
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "DIV",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Code",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "ODS Code",
-    "pd_dtype": "str",
-    "bq_name": null,
-    "bq_dtype": null
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Practice",
-    "pd_dtype": "str",
-    "bq_name": "Practice",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "List_Size",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Div_List",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Consult",
-    "pd_dtype": "str",
-    "bq_name": "Consult",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Date",
-    "pd_dtype": "datetime64",
-    "bq_name": "Date",
-    "bq_dtype": "DATE"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Month",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Time",
-    "pd_dtype": "datetime64",
-    "bq_name": "Time",
-    "bq_dtype": "TIME"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Day of week",
-    "pd_dtype": "datetime64",
-    "bq_name": "Day_of_week",
-    "bq_dtype": "DATE"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Age",
-    "pd_dtype": "Int64",
-    "bq_name": "Age",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Gender",
-    "pd_dtype": "str",
-    "bq_name": "Gender",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Diverted",
-    "pd_dtype": "str",
-    "bq_name": "Diverted",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Source",
-    "pd_dtype": "str",
-    "bq_name": "Source",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "PracticeID",
-    "pd_dtype": "str",
-    "bq_name": "PractcieID",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Diverted Reason",
-    "pd_dtype": "str",
-    "bq_name": "Diverted_Reason",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "PracticeID",
-    "pd_dtype": "str",
-    "bq_name": "PractcieID",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Age_Bracket",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "eConsult_1000_practice",
-    "bq_dtype": "FLOAT"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "eConsult_1000_division",
-    "bq_dtype": "FLOAT"
-  }
-],
+  ],
 
-"Usage": [
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "ODS Code",
+  "Usage": [
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "ODS Code",
+      "pd_dtype": "str",
+      "bq_name": null,
+      "bq_dtype": null
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Practice Id",
+      "pd_dtype": "str",
+      "bq_name": null,
+      "bq_dtype": null
+    },
+    {"description": "[DESCRIPTION]",
+    "csv_name": "Practice Type",
     "pd_dtype": "str",
     "bq_name": null,
     "bq_dtype": null
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Practice Id",
-    "pd_dtype": "str",
-    "bq_name": null,
-    "bq_dtype": null
-  },
-  {"description": "[DESCRIPTION]",
-  "csv_name": "Practice Type",
-  "pd_dtype": "str",
-  "bq_name": null,
-  "bq_dtype": null
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Month",
-    "bq_dtype": "DATE"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Practice",
-    "pd_dtype": "str",
-    "bq_name": "Practice",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "Code",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "DIV",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "EMIS_S1",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "List_Size",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "URL",
-    "pd_dtype": "str",
-    "bq_name": "URL",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "eConsult URL",
-    "pd_dtype": "str",
-    "bq_name": "eConuslt_URL",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "CCG",
-    "pd_dtype": "str",
-    "bq_name": "CCG",
-    "bq_dtype": "STRING"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Unique visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Unique_visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Self-help visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Self_help_visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Pharmacy self-help visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Pharmacy_self_help_visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Callback provider visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Callback_provider_visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Local service visits",
-    "pd_dtype": "Int64",
-    "bq_name": "Local_service_visits",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "eConsults submitted",
-    "pd_dtype": "Int64",
-    "bq_name": "eConsults_submitted",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "eConsults diverted",
-    "pd_dtype": "Int64",
-    "bq_name": "eConsult_diverted",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Attempts to save appointment",
-    "pd_dtype": "Int64",
-    "bq_name": "Attempts_to_save_appointments",
-    "bq_dtype": "INTEGER"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": "Estimated appointments saved",
-    "pd_dtype": "Float64",
-    "bq_name": "Estimated_appointments_saved",
-    "bq_dtype": "FLOAT"
-  },
-  {
-    "description": "[DESCRIPTION]",
-    "csv_name": null,
-    "pd_dtype": null,
-    "bq_name": "eConsults_submitted_1000",
-    "bq_dtype": "FLOAT"
-  }
-]
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Month",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Practice",
+      "pd_dtype": "str",
+      "bq_name": "Practice",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Code",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "DIV",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "EMIS_S1",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "List_Size",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "URL",
+      "pd_dtype": "str",
+      "bq_name": "URL",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "eConsult URL",
+      "pd_dtype": "str",
+      "bq_name": "eConuslt_URL",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "CCG",
+      "pd_dtype": "str",
+      "bq_name": "CCG",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Unique visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Unique_visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Self-help visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Self_help_visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Pharmacy self-help visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Pharmacy_self_help_visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Callback provider visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Callback_provider_visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Local service visits",
+      "pd_dtype": "Int64",
+      "bq_name": "Local_service_visits",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "eConsults submitted",
+      "pd_dtype": "Int64",
+      "bq_name": "eConsults_submitted",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "eConsults diverted",
+      "pd_dtype": "Int64",
+      "bq_name": "eConsult_diverted",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Attempts to save appointment",
+      "pd_dtype": "Int64",
+      "bq_name": "Attempts_to_save_appointments",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Estimated appointments saved",
+      "pd_dtype": "Float64",
+      "bq_name": "Estimated_appointments_saved",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "eConsults_submitted_1000",
+      "bq_dtype": "FLOAT"
+    }
+  ]
 }

@@ -67,8 +67,10 @@ def consultations_clean(input_file):
 
     # Open and load json metadata file
     json_file = open("metadata.json")
+    json_practcie_lut = (pen("practice_lut.json")
     data = json.load(json_file)
-    practice_lut = data['practice_lut']
+    data_practcie_lut = json.load(json_pratcice_lut)
+    practice_lut = data_practice_lut['practice_lut']
     usage_metadata = data['Usage']
     reason_metadata = data['Reason']
 
@@ -79,10 +81,11 @@ def consultations_clean(input_file):
     #read in data
     usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
     reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults', dtype=pd_dtypes_reason)
-    e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', dtype={'List Size':"Int64"})
+    #only need to read in relevant indentifyer, ods code, and list size
+    e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})
 
     #look up table for list size created from NHSE df
-    list_size_lookuptable = {row[0]:row[3] for index,row in e_consult_nhse.iterrows()}
+    list_size_lookuptable = {row[0]:row[1] for index,row in e_consult_nhse.iterrows()}
 
     #dictionary of divisional list size from suming practice list sizes
     #obtaining individual divisions
@@ -142,10 +145,19 @@ def consultations_clean(input_file):
     #Emiss or S1
     usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMISS/S1'] for entry in practice_lut})
 
+    #Drop unused columns
     reason_df = reason_df.drop('ODS Code', axis=1)
     usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
+    #Rename columns for BQ
+    columns_rename = {entry['csv_name']:entry['bq_name'] for entry in reason_metadata}
+    reason_df.rename(columns=columns_rename, inplace=True)
+
+    columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
+    usage_df.rename(columns=columns_rename, inplace=True)
     #close json_file
     json_file.close()
+    data_practcie_lut.close()
+
     return usage_df, reason_df
 consultations_clean("eConsult.xlsx")

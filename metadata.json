@@ -1,14 +1,14 @@
 {
 "Budget": [
     {
-      "description": "[DESCRIPTION]",
+      "description": "Numeric Year",
       "csv_name": "Year",
       "pd_dtype": "str",
       "bq_name": "Year",
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Month name in full",
       "csv_name": "Month",
       "pd_dtype": "str",
       "bq_name": "Month",
@@ -22,7 +22,7 @@
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Account reference number",
       "csv_name": "A/C Ref",
       "pd_dtype": "str",
       "bq_name": "A_C_Ref",
@@ -50,14 +50,14 @@
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Cost Centre",
       "csv_name": "CC",
       "pd_dtype": "str",
       "bq_name": "CC",
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Division",
       "csv_name": "Dp",
       "pd_dtype": "str",
       "bq_name": "Dp",
@@ -480,232 +480,5 @@
     "bq_name": "eConsults_submitted_1000",
     "bq_dtype": "FLOAT"
   }
-],
-
-
-"practice_lut": [
-  
-    {
-      "ODS Code":"M88013",
-      "DIV":"BIR",
-      "practice_code":"BCF",
-      "EMISS/S1":"S1"
-    }, 
-    {
-      "ODS Code":"M85124",
-      "DIV":"BIR",
-      "practice_code":"BEL",
-      "EMISS/S1":"S1"
-      
-    }, 
-    {
-      "ODS Code":"G85124",
-      "DIV":"LEW",
-      "practice_code":"BGS",
-      "EMISS/S1":"EMIS"
-    }, 
-    {
-      "ODS Code":"H81037",
-      "DIV":"SUR",
-      "practice_code":"BMP",
-      "EMISS/S1":"EMIS"
-    }, 
-    {
-      "ODS Code":"K81638",
-      "DIV":"WOK",
-      "practice_code":"BUR",
-      "EMISS/S1":"EMIS"
-    }, 
-    {
-      "ODS Code":"H82040",
-      "DIV":"SUS",
-      "practice_code":"CHD",
-      "EMISS/S1":"EMIS"
-    }, 
-    {
-      "ODS Code":"B82020",
-      "DIV":"AWC",
-      "practice_code":"CRS",
-      "EMISS/S1":"S1"
-    }, 
-    {
-      "ODS Code":"M85178",
-      "DIV":"BIR",
-      "practice_code":"ENK",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"B83021",
-      "DIV":"AWC",
-      "practice_code":"FAR",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"B82028",
-      "DIV":"AWC",
-      "practice_code":"FIS",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"M85002",
-      "DIV":"BIR",
-      "practice_code":"HWM",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"B83027",
-      "DIV":"AWC",
-      "practice_code":"HAW",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"M85016",
-      "DIV":"BIR",
-      "practice_code":"HIL",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"B83023",
-      "DIV":"AWC",
-      "practice_code":"HOL",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"G85004",
-      "DIV":"LEW",
-      "practice_code":"JEN",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"H82010",
-      "DIV":"SUS",
-      "practice_code":"JCS",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"B83033",
-      "DIV":"AWC",
-      "practice_code":"KIL",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"M85069",
-      "DIV":"BIR",
-      "practice_code":"LPH",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"M91028",
-      "DIV":"WAL",
-      "practice_code":"BER",
-      "EMISS/S1":"EMIS"
-    },
-    {"ODS Code":"M91032",
-      "DIV":"WAL",
-      "practice_code":"COL",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"M91660",
-      "DIV":"WAL",
-      "practice_code":"VAI",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"M91613",
-      "DIV":"WAL",
-      "practice_code":"FOR",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"Y02627",
-      "DIV":"WAL",
-      "practice_code":"HAR",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"B81048",
-      "DIV":"HUL",
-      "practice_code":"NEL",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"M91016",
-      "DIV":"WAL",
-      "practice_code":"NIN",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"B83061",
-      "DIV":"AWC",
-      "practice_code":"OAK",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"H82621",
-      "DIV":"SUS",
-      "practice_code":"PVH",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"M91616",
-      "DIV":"WAL",
-      "practice_code":"PLE",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"H82008",
-      "DIV":"SUS",
-      "practice_code":"SHI",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"B83006",
-      "DIV":"AWC",
-      "practice_code":"SIL",
-      "EMISS/S1":"S1"
-    }, 
-    {
-      "ODS Code":"H81638",
-      "DIV":"SUR",
-      "practice_code":"SMA",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"M88002",
-      "DIV":"BIR",
-      "practice_code":"SMC",
-      "EMISS/S1":"S1"
-    },
-    {
-      "ODS Code":"G85005",
-      "DIV":"LEW",
-      "practice_code":"SLG",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"M91007",
-      "DIV":"WAL",
-      "practice_code":"SJO",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"Y02626",
-      "DIV":"WAL",
-      "practice_code":"KEY",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"H81060",
-      "DIV":"SUR",
-      "practice_code":"TMP",
-      "EMISS/S1":"EMIS"
-    },
-    {
-      "ODS Code":"K81022",
-      "DIV":"WOK",
-      "practice_code":"WOK",
-      "EMISS/S1":"EMIS"
-    }
-  ]
+]
 }

@@ -280,7 +280,7 @@
       "description": "[DESCRIPTION]",
       "csv_name": "PracticeID",
       "pd_dtype": "str",
-      "bq_name": "PractcieID",
+      "bq_name": "PracticeID",
       "bq_dtype": "STRING"
     },
     {
@@ -288,13 +288,6 @@
       "csv_name": "Diverted Reason",
       "pd_dtype": "str",
       "bq_name": "Diverted_Reason",
-      "bq_dtype": "STRING"
-    },
-    {
-      "description": "[DESCRIPTION]",
-      "csv_name": "PracticeID",
-      "pd_dtype": "str",
-      "bq_name": "PractcieID",
       "bq_dtype": "STRING"
     },
     {

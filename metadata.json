@@ -1,14 +1,14 @@
 {
 "Budget": [
     {
-      "description": "[DESCRIPTION]",
+      "description": "Numeric Year",
       "csv_name": "Year",
       "pd_dtype": "str",
       "bq_name": "Year",
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Month name in full",
       "csv_name": "Month",
       "pd_dtype": "str",
       "bq_name": "Month",
@@ -22,7 +22,7 @@
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Account reference number",
       "csv_name": "A/C Ref",
       "pd_dtype": "str",
       "bq_name": "A_C_Ref",
@@ -50,14 +50,14 @@
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Cost Centre",
       "csv_name": "CC",
       "pd_dtype": "str",
       "bq_name": "CC",
       "bq_dtype": "STRING"
     },
     {
-      "description": "[DESCRIPTION]",
+      "description": "Division",
       "csv_name": "Dp",
       "pd_dtype": "str",
       "bq_name": "Dp",
@@ -169,6 +169,7 @@
       "bq_dtype": "STRING"
     }
    ],
+   
   "Reason":[
     {
       "description": "[DESCRIPTION]",

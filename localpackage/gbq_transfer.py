@@ -11,10 +11,10 @@ def df_to_gbq(df, dataset, table_name):
     # Open and load json metadata file
     json_file = open("metadata.json")
     data = json.load(json_file)
-    metadata = data[table_name] # Change in final version
+    metadata = data["Reason"] # Change in final version
 
     # Create BigQuery schema from json metadata 
-    schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in metadata]
+    schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in metadata if entry['bq_name'] != None]
 
     job_config = bigquery.LoadJobConfig(schema=schema)
 

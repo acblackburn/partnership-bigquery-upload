@@ -132,6 +132,12 @@ def consultations_clean(input_file):
     reason_df['Diverted Reason'] = reason_df['Diverted Reason'].fillna("N")
 
     #Data for usage df
+    #To add divison to usage dataframe
+    usage_df['DIV'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lut})
+   
+   #To add practice code to reson dataframe
+    usage_df['Code'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lut})
+
     #To add list size to usage df
     usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
 
@@ -167,4 +173,3 @@ def consultations_clean(input_file):
     json_practice_lut.close()
 
     return usage_df, reason_df
-consultations_clean("eConsult.xlsx")

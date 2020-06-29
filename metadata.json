@@ -79,7 +79,7 @@
     },
     {
       "description": "[List Size]",
-      "csv_name": "List Size",
+      "csv_name": "List SCize",
       "pd_dtype": "Int64",
       "bq_name": "List_Size",
       "bq_dtype": "INTEGER"
@@ -412,7 +412,7 @@
     },
     {
       "description": "[DESCRIPTION]",
-      "csv_name": "Unique visits",
+      "csv_name": "Unique visitors",
       "pd_dtype": "Int64",
       "bq_name": "Unique_visits",
       "bq_dtype": "INTEGER"

@@ -8,9 +8,9 @@ def clean_budget(input_file):
     """Cleans monthly Budget csv file."""
 
     # Open and load json metadata file
-    json_file = open("metadata.json")
-    data = json.load(json_file)
-    budget_metadata = data['Budget']
+    with open("metadata.json") as json_file:
+        data = json.load(json_file)
+        budget_metadata = data['Budget']
     
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
@@ -41,13 +41,10 @@ def clean_budget(input_file):
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
-    # df.columns = df.columns.str.replace(' ','_').str.replace('/','_')
     df = df.sort_values('Date', ignore_index=True)
-    json_file.close()
     
     return df
-
-            
+          
 def age_bracket(int):
     if int <= 20:
         return "<20"
@@ -67,56 +64,55 @@ def consultations_clean(input_file):
     '''Cleans eConsult data. File to be uploaded weekly '''
 
     # Open and load json metadata file
-    json_file = open("metadata.json")
-    json_practice_lut = open("practice_lut.json")
-    data = json.load(json_file)
-    data_practice_lut = json.load(json_practice_lut)
-    practice_lut = data_practice_lut['practice_lut']
-    usage_metadata = data['Usage']
-    reason_metadata = data['Reason']
+    with open("metadata.json") as json_file:
+        data = json.load(json_file)
+        usage_metadata = data['Usage']
+        reason_metadata = data['Reason']
+    
+    with open("practice_lookup.json") as json_file:
+        practice_lookup = json.load(json_file)
 
      # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes_usage = {entry['csv_name']:entry['pd_dtype'] for entry in usage_metadata if entry['csv_name'] != None}
     pd_dtypes_reason = {entry['csv_name']:entry['pd_dtype'] for entry in reason_metadata if entry['csv_name'] != None}
     
-    #read in data
+    # Read in each excel sheet to separate DataFrames from the eConsult file
     usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
     reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults', dtype=pd_dtypes_reason)
-    #only need to read in relevant indentifyer, ods code, and list size
+    # Only need to read in relevant indentifyer, ods code, and list size
     e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})
 
-    #look up table for list size created from NHSE df
-    list_size_lookuptable = {row[0]:row[1] for index,row in e_consult_nhse.iterrows()}
+    # Look up table for list size created from NHSE df
+    list_size_lookup = {row[0]:row[1] for index,row in e_consult_nhse.iterrows()}
 
-    #dictionary of divisional list size from suming practice list sizes
-    #obtaining individual divisions
-    div = set(entry['DIV'] for entry in practice_lut)
+    # Dictionary of divisional list size from summing practice list sizes
+    # Obtaining individual divisions
+    div = set(entry['DIV'] for entry in practice_lookup)
 
-    #need to make this better
-    #division look up table created
-    division_list_size_lut = {}
+    # Division look up table created
+    division_list_size_lookup = {}
     for division in div:
-        for entry in practice_lut:
+        for entry in practice_lookup:
             if entry['DIV'] == division: 
-                if division not in division_list_size_lut:
-                    division_list_size_lut[division] = list_size_lookuptable[entry['ODS Code']]
+                if division not in division_list_size_lookup:
+                    division_list_size_lookup[division] = list_size_lookup[entry['ODS Code']]
                 else: 
-                    division_list_size_lut[division] += list_size_lookuptable[entry['ODS Code']]
+                    division_list_size_lookup[division] += list_size_lookup[entry['ODS Code']]
     
     #Data for reaon dataframe
     #To add divison to reson dataframe
-    reason_df['DIV'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lut})
+    reason_df['DIV'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lookup})
    
-   #To add practice code to reson dataframe
-    reason_df['Code'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lut})
+    #To add practice code to reson dataframe
+    reason_df['Code'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lookup})
 
     #To add list size to reason dataframe
-    reason_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
+    reason_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookup[x])
     
     #To add divisional list size to reason dataframe
-    reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: division_list_size_lut[x])
+    reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: division_list_size_lookup[x])
 
-    #To add age bracket to reason datafram
+    #To add age bracket to reason dataframe
     reason_df['Age_Bracket'] = reason_df['Age'].apply(age_bracket)
     
     #reason per 1000 divisonal size
@@ -139,13 +135,13 @@ def consultations_clean(input_file):
 
     #Data for usage df
     #To add divison to usage dataframe
-    usage_df['DIV'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lut})
+    usage_df['DIV'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lookup})
    
    #To add practice code to reson dataframe
-    usage_df['Code'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lut})
+    usage_df['Code'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lookup})
 
     #To add list size to usage df
-    usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookuptable[x])
+    usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookup[x])
 
     #eConsults submitted per 1000 practice list size
     usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
@@ -159,9 +155,9 @@ def consultations_clean(input_file):
     usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
 
     # EMIS or S1
-    usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lut})
+    usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lookup})
 
-    #Drop unused columns
+    # Drop unused columns
     reason_df = reason_df.drop(['ODS Code','Day of week'], axis=1)
     usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
@@ -173,9 +169,5 @@ def consultations_clean(input_file):
     #usage
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=columns_rename, inplace=True)
-
-    #close json_file
-    json_file.close()
-    json_practice_lut.close()
 
     return usage_df, reason_df

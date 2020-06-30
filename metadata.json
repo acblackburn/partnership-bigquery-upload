@@ -237,16 +237,9 @@
     {
       "description": "[DESCRIPTION]",
       "csv_name": "Time",
-      "pd_dtype": "datetime64",
+      "pd_dtype": "str",
       "bq_name": "Time",
       "bq_dtype": "STRING"
-    },
-    {
-      "description": "[DESCRIPTION]",
-      "csv_name": "Day of week",
-      "pd_dtype": "datetime64",
-      "bq_name": "Day_of_week",
-      "bq_dtype": "DATE"
     },
     {
       "description": "[DESCRIPTION]",
@@ -387,7 +380,7 @@
       "description": "[DESCRIPTION]",
       "csv_name": "eConsult URL",
       "pd_dtype": "str",
-      "bq_name": "eConuslt_URL",
+      "bq_name": "eConsult_URL",
       "bq_dtype": "STRING"
     },
     {
@@ -408,7 +401,7 @@
       "description": "[DESCRIPTION]",
       "csv_name": "Unique visitors",
       "pd_dtype": "Int64",
-      "bq_name": "Unique_visits",
+      "bq_name": "Unique_visitors",
       "bq_dtype": "INTEGER"
     },
     {
@@ -450,14 +443,14 @@
       "description": "[DESCRIPTION]",
       "csv_name": "eConsults diverted",
       "pd_dtype": "Int64",
-      "bq_name": "eConsult_diverted",
+      "bq_name": "eConsults_diverted",
       "bq_dtype": "INTEGER"
     },
     {
       "description": "[DESCRIPTION]",
       "csv_name": "Attempts to save appointment",
       "pd_dtype": "Int64",
-      "bq_name": "Attempts_to_save_appointments",
+      "bq_name": "Attempts_to_save_appointment",
       "bq_dtype": "INTEGER"
     },
     {

@@ -162,7 +162,7 @@ def consultations_clean(input_file):
     date = day + "/" + month + "/" + year
     usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
 
-    #Emiss or S1
+    # EMIS or S1
     usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lut})
 
     #Drop unused columns

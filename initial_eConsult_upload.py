@@ -12,8 +12,9 @@ def initial_reason_upload(input_file):
     df['Div_List'] = df['Div_List'].round().astype(int)
     df['Month'] = df['Date'].dt.strftime('%B')
     df['Diverted'] = df['Diverted'].fillna('N')
-    df['Day_of_week'] = df['Day_of_week'].astype(np.datetime64[D])
+    df['Day_of_week'] = df['Day_of_week'].astype("datetime64[D]")
     print(df.dtypes)
+    print(df['Date'].head())
 
     # bq_client = bigquery.Client(project="modalitydashboards")
     # table_id = "modalitydashboards.eConsult.Reason"

@@ -17,8 +17,8 @@ from localpackage.gbq_transfer import df_to_gbq, data_file_info, delete_blob
 
 def main():
     test_df_usage, test_df_reason = fc.consultations_clean('eConsult.xlsx')
-    #df_to_gbq(test_df_usage, "eConsult", "Usage_test")
-    df_to_gbq(test_df_reason, "eConsult", "Reason_test")
+    df_to_gbq(test_df_usage, "eConsult", "Usage_test")
+    #df_to_gbq(test_df_reason, "eConsult", "Reason_test")
 
 
 if __name__ == "__main__":

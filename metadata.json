@@ -245,8 +245,8 @@
       "description": "[DESCRIPTION]",
       "csv_name": "Day of week",
       "pd_dtype": "datetime64",
-      "bq_name": "Day_of_week",
-      "bq_dtype": "DATE"
+      "bq_name": null,
+      "bq_dtype": null
     },
     {
       "description": "[DESCRIPTION]",

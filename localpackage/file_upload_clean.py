@@ -131,6 +131,16 @@ def consultations_clean(input_file):
     #Fill reson diverted null values with No (N)
     reason_df['Diverted Reason'] = reason_df['Diverted Reason'].fillna("N")
 
+    #Reson time column changed to time module
+    reason_df['Time'] = reason_df['Time'].apply(lambda x: x.strftime('%H:%M:%S'))
+    
+    # #Reson date column changed to date module
+    reason_df['Date'] = reason_df['Date'].apply(lambda x: x.date())
+
+    #Reson day of the week column changed to date module
+    reason_df['Day of week'] = reason_df['Day of week'].apply(lambda x: x.date())
+
+
     #Data for usage df
     #To add divison to usage dataframe
     usage_df['DIV'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lut})
@@ -156,7 +166,7 @@ def consultations_clean(input_file):
     usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lut})
 
     #Drop unused columns
-    reason_df = reason_df.drop('ODS Code', axis=1)
+    reason_df = reason_df.drop(['ODS Code'], axis=1)
     usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
     #Rename columns for BQ

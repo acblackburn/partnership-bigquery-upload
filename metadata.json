@@ -239,7 +239,7 @@
       "csv_name": "Time",
       "pd_dtype": "datetime64",
       "bq_name": "Time",
-      "bq_dtype": "TIME"
+      "bq_dtype": "STRING"
     },
     {
       "description": "[DESCRIPTION]",

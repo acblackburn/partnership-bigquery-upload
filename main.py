@@ -13,3 +13,11 @@ def main(data, context):
         df_to_gbq(test_df_reason, "eConsult", "Reason")
     
     delete_blob(data['bucket'], data['name'])
+
+# def main():
+#     test_df_usage, test_df_reason = fc.consultations_clean("gs://dashboards_data_upload/eConsult/eConsult_usage_report_for_Modality__2020060120200630.xlsx")
+#     print(test_df_usage.dtypes)
+#     df_to_gbq(test_df_reason, "eConsult", "Reason_test")
+
+# if __name__ == "__main__":
+#     main()

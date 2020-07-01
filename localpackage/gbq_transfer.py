@@ -9,9 +9,9 @@ def df_to_gbq(df, dataset, table_name):
     table_id = f"modalitydashboards.{dataset}.{table_name}"
 
     # Open and load json metadata file
-    json_file = open("metadata.json")
-    data = json.load(json_file)
-    metadata = data["Usage"] # Change in final version
+    with open("metadata.json") as json_file:
+        data = json.load(json_file)
+        metadata = data[table_name]
 
     # Create BigQuery schema from json metadata 
     schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in metadata if entry['bq_name'] != None]
@@ -25,7 +25,6 @@ def df_to_gbq(df, dataset, table_name):
 
     # Wait for load job to complete anc close open json file
     job.result()
-    json_file.close()
 
 def data_file_info(string):
     """Split file uploaded to google cloud bucket into a filepath and filename."""

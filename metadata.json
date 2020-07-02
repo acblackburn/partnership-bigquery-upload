@@ -79,7 +79,7 @@
     },
     {
       "description": "[List Size]",
-      "csv_name": "List SCize",
+      "csv_name": "List Size",
       "pd_dtype": "Int64",
       "bq_name": "List_Size",
       "bq_dtype": "INTEGER"

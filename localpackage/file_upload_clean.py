@@ -19,6 +19,11 @@ def clean_budget(input_file):
         input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
         )
     
+    # Remove empty rows and columns
+    empty_columns = [col for col in df if col.startswith('Unnamed')]
+    df.drop(empty_columns, axis=1, inplace=True)
+    df.dropna(axis=0, how='all', inplace=True)
+
     # Parse 'Date' column from 'Month' and 'Year' columns
     df['Date'] = df['Month'].str.strip() + "/" + df['Year'].astype(str)
     df['Date'] = pd.to_datetime(df['Date'], format="%B/%Y")
@@ -41,8 +46,7 @@ def clean_budget(input_file):
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
-    # Drop rows containing all NA values and sort DataFrame
-    df.dropna(axis=0, how='all', inplace=True)
+    # Sort DataFrame
     df = df.sort_values('Date', ignore_index=True)
     
     return df
@@ -81,6 +85,14 @@ def clean_consultations(input_file):
     # Read in each excel sheet to separate DataFrames from the eConsult file
     usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
     reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults', dtype=pd_dtypes_reason)
+
+    # Remove empty rows and columns
+    empty_columns_usage = [col for col in usage_df if col.startswith('Unnamed')]
+    usage_df.drop(empty_columns_usage, axis=1, inplace=True)
+    usage_df.dropna(axis=0, how='all', inplace=True)
+    empty_columns_reason = [col for col in reason_df if col.startswith('Unnamed')]
+    reason_df.drop(empty_columns_reason, axis=1, inplace=True)
+    reason_df.dropna(axis=0, how='all', inplace=True)
 
     # Only need to read in relevant indentifyer, ods code, and list size
     e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})

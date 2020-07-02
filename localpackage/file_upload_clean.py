@@ -41,6 +41,8 @@ def clean_budget(input_file):
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
+    # Drop rows containing all NA values and sort DataFrame
+    df.dropna(axis=0, how='all', inplace=True)
     df = df.sort_values('Date', ignore_index=True)
     
     return df

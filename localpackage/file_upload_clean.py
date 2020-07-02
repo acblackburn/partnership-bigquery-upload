@@ -60,7 +60,7 @@ def age_bracket(int):
         return "61-70"
     else: return "70+"
 
-def consultations_clean(input_file):
+def clean_consultations(input_file):
     '''Cleans eConsult data. File to be uploaded weekly '''
 
     # Open and load json metadata file
@@ -166,4 +166,4 @@ def consultations_clean(input_file):
     reason_columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=reason_columns_rename, inplace=True)
 
-    return usage_df, reason_df
+    return (usage_df, reason_df)

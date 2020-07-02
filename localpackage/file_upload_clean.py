@@ -41,6 +41,8 @@ def clean_budget(input_file):
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
+    # Drop rows containing all NA values and sort DataFrame
+    df.dropna(axis=0, how='all', inplace=True)
     df = df.sort_values('Date', ignore_index=True)
     
     return df
@@ -60,7 +62,7 @@ def age_bracket(int):
         return "61-70"
     else: return "70+"
 
-def consultations_clean(input_file):
+def clean_consultations(input_file):
     '''Cleans eConsult data. File to be uploaded weekly '''
 
     # Open and load json metadata file

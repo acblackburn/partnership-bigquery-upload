@@ -8,7 +8,7 @@ def main(data, context):
         budget_df = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(budget_df, "Finance", "Budget")
     elif file_path == "eConsult":
-        test_df_usage, test_df_reason = fc.consultations_clean(f"gs://{data['bucket']}/{data['name']}")
+        test_df_usage, test_df_reason = fc.clean_consultations(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(test_df_usage, "eConsult", "Usage")
         df_to_gbq(test_df_reason, "eConsult", "Reason")
     

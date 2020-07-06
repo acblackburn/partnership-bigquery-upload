@@ -29,7 +29,7 @@ def df_to_gbq(df, dataset, table_name):
 def data_file_info(string):
     """Split file uploaded to google cloud bucket into a filepath and filename."""
     path, filename = os.path.split(string)
-    return (path, filename)
+    return path, filename
 
 def delete_blob(bucket_name, blob_name):
     """Deletes a blob (file) from a bucket."""

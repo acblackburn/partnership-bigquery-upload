@@ -159,12 +159,10 @@ def clean_consultations(input_file):
     # eConsults submitted per 1000 practice list size
     usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
     
-    # Month column specified as the 1st of each month in data format
-    day = "01"
+    # Month column specified as the 1st of each month in date format
     month = reason_df['Month'][0]
     year = reason_df['Date'][0].strftime("%Y")
-    "{}/{}/{}".format(day,month,year)
-    date = day + "/" + month + "/" + year
+    date = f"01/{month}/{year}"
     usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
 
     # Add EMIS or S1 column to usage dataframe
@@ -180,4 +178,4 @@ def clean_consultations(input_file):
     reason_columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=reason_columns_rename, inplace=True)
 
-    return (usage_df, reason_df)
+    return usage_df, reason_df

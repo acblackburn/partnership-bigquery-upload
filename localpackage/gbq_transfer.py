@@ -23,7 +23,7 @@ def df_to_gbq(df, dataset, table_name):
         df, table_id, job_config=job_config
     )
 
-    # Wait for load job to complete anc close open json file
+    # Wait for load job to complete
     job.result()
 
 def data_file_info(string):

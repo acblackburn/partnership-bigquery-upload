@@ -6,7 +6,7 @@ def main(data, context):
     
     if file_path == "Budget":
         df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
-        df_to_gbq(budget_df, "Finance", "Budget")
+        df_to_gbq(df_budget, "Finance", "Budget")
     elif file_path == "eConsult":
         df_usage, df_reason = fc.clean_consultations(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_usage, "eConsult", "Usage")

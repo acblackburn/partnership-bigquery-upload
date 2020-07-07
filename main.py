@@ -8,9 +8,9 @@ def main(data, context):
         df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_budget, "Finance", "Budget")
     if file_path == "eConsult":
-        df_usage = fc.clean_consultations(f"gs://{data['bucket']}/{data['name']}")[0]
+        df_usage, df_reason = fc.clean_consultations(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_usage, "eConsult", "Usage")
-        # df_to_gbq(df_reason, "eConsult", "Reason")
+        df_to_gbq(df_reason, "eConsult", "Reason")
 
     delete_blob(data['bucket'], data['name'])
 

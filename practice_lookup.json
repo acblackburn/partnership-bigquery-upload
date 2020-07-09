@@ -2,220 +2,258 @@
   "ODS Code":"M88013",
   "DIV":"BIR",
   "practice_code":"BCF",
+  "practice_name":"Black Country Family Practice Modality",
   "EMIS/S1":"S1"
 }, 
 {
   "ODS Code":"M85124",
   "DIV":"BIR",
   "practice_code":"BEL",
+  "practice_name":"Bellevue Medical Centre Modality",
   "EMIS/S1":"S1"
 }, 
 {
   "ODS Code":"G85124",
   "DIV":"LEW",
   "practice_code":"BGS",
+  "practice_name":"Bellingham Green Surgery Modality",
   "EMIS/S1":"EMIS"
-}, 
+},
 {
   "ODS Code":"H81037",
   "DIV":"SUR",
   "practice_code":"BMP",
+  "practice_name":"Birchwood Medical Practice",
   "EMIS/S1":"EMIS"
-}, 
+},
 {
   "ODS Code":"K81638",
   "DIV":"WOK",
   "practice_code":"BUR",
+  "practice_name":"Burma Hills Surgery Modality",
   "EMIS/S1":"EMIS"
 }, 
 {
   "ODS Code":"H82040",
   "DIV":"SUS",
   "practice_code":"CHD",
+  "practice_name":"Crawley Down Surgery Modality",
   "EMIS/S1":"EMIS"
 }, 
 {
   "ODS Code":"B82020",
   "DIV":"AWC",
   "practice_code":"CRS",
+  "practice_name":"Cross Hills Group Practice Modality",
   "EMIS/S1":"S1"
 }, 
 {
   "ODS Code":"M85178",
   "DIV":"BIR",
   "practice_code":"ENK",
+  "practice_name":"Enki Medical Centre Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"B83021",
   "DIV":"AWC",
   "practice_code":"FAR",
+  "practice_name":"Farfield Group Practice Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"B82028",
   "DIV":"AWC",
   "practice_code":"FIS",
+  "practice_name":"Fisher Medical Centre Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"M85002",
   "DIV":"BIR",
   "practice_code":"HWM",
+  "practice_name":"Handsworth Wood Medical Centre Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"B83027",
   "DIV":"AWC",
   "practice_code":"HAW",
+  "practice_name":"Haworth Medical Practice Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"M85016",
   "DIV":"BIR",
   "practice_code":"HIL",
+  "practice_name":"Hillcrest Surgery Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"B83023",
   "DIV":"AWC",
   "practice_code":"HOL",
+  "practice_name":"Holycroft Surgery Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"G85004",
   "DIV":"LEW",
   "practice_code":"JEN",
+  "practice_name":"The Jenner Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"H82010",
   "DIV":"SUS",
   "practice_code":"JCS",
+  "practice_name":"Judges Close Surgery Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"B83033",
   "DIV":"AWC",
   "practice_code":"KIL",
+  "practice_name":"Kilmeny Group Medical Practice Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"M85069",
   "DIV":"BIR",
   "practice_code":"LPH",
+  "practice_name":"Laurie Pike Health Centre Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"M91028",
   "DIV":"WAL",
   "practice_code":"BER",
+  "practice_name":"Kingfisher Berkley Practice Modality",
   "EMIS/S1":"EMIS"
 },
-{"ODS Code":"M91032",
+{
+  "ODS Code":"M91032",
   "DIV":"WAL",
   "practice_code":"COL",
+  "practice_name":"Collingwood Family Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"M91660",
   "DIV":"WAL",
   "practice_code":"VAI",
+  "practice_name":"Modality Darlaston Practice",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"M91613",
   "DIV":"WAL",
   "practice_code":"FOR",
+  "practice_name":"Forrester Street Medical Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"Y02627",
   "DIV":"WAL",
   "practice_code":"HAR",
+  "practice_name":"Harden Blakenall Family Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"B81048",
   "DIV":"HUL",
   "practice_code":"NEL",
+  "practice_name":"Modality Partnership Hull",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"M91016",
   "DIV":"WAL",
   "practice_code":"NIN",
+  "practice_name":"New Invention Health Centre Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"B83061",
   "DIV":"AWC",
   "practice_code":"OAK",
+  "practice_name":"Oakworth Medical Practice Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"H82621",
   "DIV":"SUS",
   "practice_code":"PVH",
+  "practice_name":"Park View Health Partnership Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"M91616",
   "DIV":"WAL",
   "practice_code":"PLE",
+  "practice_name":"Pleck Health Centre Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"H82008",
   "DIV":"SUS",
   "practice_code":"SHI",
+  "practice_name":"Ship Street Surgery Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"B83006",
   "DIV":"AWC",
   "practice_code":"SIL",
+  "practice_name":"Silsden and Steeton Medical Practice",
   "EMIS/S1":"S1"
 }, 
 {
   "ODS Code":"H81638",
   "DIV":"SUR",
   "practice_code":"SMA",
+  "practice_name":"Smallfield Surgery Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"M88002",
   "DIV":"BIR",
   "practice_code":"SMC",
+  "practice_name":"Smethwick Medical Centre Modality",
   "EMIS/S1":"S1"
 },
 {
   "ODS Code":"G85005",
   "DIV":"LEW",
   "practice_code":"SLG",
+  "practice_name":"South Lewisham Group Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"M91007",
   "DIV":"WAL",
   "practice_code":"SJO",
+  "practice_name":"St Johns Medical Centre Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"Y02626",
   "DIV":"WAL",
   "practice_code":"KEY",
+  "practice_name":"Keys Family Practice Modality",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"H81060",
   "DIV":"SUR",
   "practice_code":"TMP",
+  "practice_name":"Townhill Medical Practice",
   "EMIS/S1":"EMIS"
 },
 {
   "ODS Code":"K81022",
   "DIV":"WOK",
   "practice_code":"WOK",
+  "practice_name":"Wokingham Medical Centre Modality",
   "EMIS/S1":"EMIS"
 }]

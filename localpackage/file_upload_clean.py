@@ -193,4 +193,4 @@ def clean_consultations(input_file):
     reason_columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=reason_columns_rename, inplace=True)
 
-    return usage_df
+    return usage_df, reason_df

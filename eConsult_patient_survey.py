@@ -28,6 +28,10 @@ class FeedbackQuestion:
             columns={'PRACTICE':'Practice', 'level_1':'Response', 0:'Number_of_Responses'}
         )
 
+    def remove_grandtotal(self):
+        """Removes Grand Total rows from each question sub-dataframe"""
+        self.data = self.data[self.data.Practice != "Grand Total"]
+
 # Open practice metadata file
 with open("practice_lookup.json") as json_file:
         practice_lookup = json.load(json_file)
@@ -64,6 +68,8 @@ for df in patient_feedback_df_list:
     # Stack question responses into rows  
     question.stack_responses()
 
+    question.remove_grandtotal()
+
     # Add Question, Division and Practice code columns to each data frame
     question.data['Question'] = question.question
     question.data['DIV'] = question.data['Practice'].map({entry['practice_name']:entry['DIV'] for entry in practice_lookup})
@@ -83,7 +89,7 @@ full_df = full_df.reindex(
 full_df['Number_of_Responses'] = full_df['Number_of_Responses'].astype(int)
 
 bq_client = bigquery.Client(project="modalitydashboards")
-table_id = "modalitydashboards.eConsult.patient_feedback_responses"
+table_id = "modalitydashboards.eConsult.patient_feedback_response"
 
 schema = [
     bigquery.SchemaField('Month', 'DATE'),

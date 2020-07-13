@@ -78,10 +78,12 @@ for df in patient_feedback_df_list:
     question.data['Question'] = question.question
     question.data['DIV'] = question.data['Practice'].map({entry['practice_name']:entry['DIV'] for entry in practice_lookup})
     question.data['Practice_Code'] = question.data['Practice'].map({entry['practice_name']:entry['practice_code'] for entry in practice_lookup})
-    question.data['Response_Index'] = np.arange(len(question.data))
+    # question.data['Response_Index'] = np.arange(len(question.data))
 
     # Append each question to the combined data frame.
     full_df = full_df.append(question.data)
+
+full_df['Response_Index'] = np.arange(len(full_df))
 
 # Add Month column
 full_df['Month'] = month
@@ -103,7 +105,7 @@ schema = [
     bigquery.SchemaField('Practice', 'STRING'),
     bigquery.SchemaField('Question', 'STRING'),
     bigquery.SchemaField('Response', 'STRING'),
-    bigquery.SchemaField('Number_of_Responses', 'INTEGER')
+    bigquery.SchemaField('Number_of_Responses', 'INTEGER'),
     bigquery.SchemaField('Response_Index', 'INTEGER')
 ]
 

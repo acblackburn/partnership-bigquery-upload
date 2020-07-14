@@ -15,7 +15,7 @@ from localpackage.gbq_transfer import df_to_gbq, data_file_info, delete_blob
 #     delete_blob(data['bucket'], data['name'])
 
 def main():
-    data = "gs://dashboards-data-upload/eConsult/eConsult_usage_report_for_Modality__2020060120200630.xlsx"
+    data = "data/eConsult_usage_report_July_02.xlsx"
     df_usage, df_reason = fc.clean_consultations(data)
     df_to_gbq(df_usage, "eConsult", "Usage")
     df_to_gbq(df_reason, "eConsult", "Reason")

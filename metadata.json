@@ -331,7 +331,7 @@
       "description": "[DESCRIPTION]",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Month",
+      "bq_name": "Week_Month",
       "bq_dtype": "DATE"
     },
     {

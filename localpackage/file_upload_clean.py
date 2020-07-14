@@ -83,8 +83,8 @@ def clean_consultations(input_file):
     pd_dtypes_reason = {entry['csv_name']:entry['pd_dtype'] for entry in reason_metadata if entry['csv_name'] != None}
     
     # Read in each excel sheet to separate DataFrames from the eConsult file
-    usage_df = pd.read_excel('econsult.xlsx', sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
-    reason_df = pd.read_excel('econsult.xlsx', sheet_name='All Consults', dtype=pd_dtypes_reason)
+    usage_df = pd.read_excel(input_file, sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
+    reason_df = pd.read_excel(input_file, sheet_name='All Consults', dtype=pd_dtypes_reason)
 
     # Remove empty rows and columns
     empty_columns_usage = [col for col in usage_df if col.startswith('Unnamed')]
@@ -95,7 +95,7 @@ def clean_consultations(input_file):
     reason_df.dropna(axis=0, how='all', inplace=True)
 
     # Only need to read in relevant indentifyer, ods code, and list size
-    e_consult_nhse = pd.read_excel('econsult.xlsx', sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})
+    e_consult_nhse = pd.read_excel(input_file, sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})
 
     # Look up table for list size created from NHSE DataFrame
     list_size_lookup = {row[0]:row[1] for index,row in e_consult_nhse.iterrows()}
@@ -175,10 +175,11 @@ def clean_consultations(input_file):
     usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
     
     # Month column specified as the 1st of each month in date format
-    month = reason_df['Month'][0]
-    year = reason_df['Date'][0].strftime("%Y")
-    date = f"01/{month}/{year}"
-    usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
+    # month = reason_df['Month'][0]
+    # year = reason_df['Date'][0].strftime("%Y")
+    # date = f"01/{month}/{year}"
+    # usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
+    usage_df['Week_Month'] = reason_df['Date'][0]
 
     # Add EMIS or S1 column to usage dataframe
     usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lookup})

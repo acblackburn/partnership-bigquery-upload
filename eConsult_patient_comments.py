@@ -43,6 +43,7 @@ for df in patient_comment_df_list:
     practice.data.insert(loc=0, column="Month", value=month)
     practice.data.insert(loc=1, column="Practice", value=practice.name)
 
+    print(practice.data)
     full_df = full_df.append(practice.data)
 
-print(full_df)
+# print(full_df)

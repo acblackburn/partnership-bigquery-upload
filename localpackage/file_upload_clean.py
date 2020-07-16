@@ -51,12 +51,14 @@ def clean_budget(input_file):
     
     return df
           
-  def age_bracket(age):
-    if age <= 20:
-        return "<20"
+def age_bracket(age):
+    if age < 10:
+        return "0-10"
+    elif age <= 20:
+        return "11-20"
     elif age <= 30:
         return "21-30"
-    elif age <=40: 
+    elif age <=40:
         return "31-40"
     elif age <=50:
         return "41-50"
@@ -64,7 +66,8 @@ def clean_budget(input_file):
         return "51-60"
     elif age <= 70:
         return "61-70"
-    else: return "70+"
+    else:
+        return "70+"
 
 def clean_consultations(input_file):
     '''Cleans eConsult data. File to be uploaded weekly '''

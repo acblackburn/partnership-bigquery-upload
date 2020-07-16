@@ -51,20 +51,20 @@ def clean_budget(input_file):
     
     return df
           
-# def age_bracket(int):
-#     if int <= 20:
-#         return "<20"
-#     elif int <= 30:
-#         return "21-30"
-#     elif int <=40: 
-#         return "31-40"
-#     elif int <=50:
-#         return "41-50"
-#     elif int <= 60:
-#         return "51-60"
-#     elif int <= 70:
-#         return "61-70"
-#     else: return "70+"
+  def age_bracket(age):
+    if age <= 20:
+        return "<20"
+    elif age <= 30:
+        return "21-30"
+    elif age <=40: 
+        return "31-40"
+    elif age <=50:
+        return "41-50"
+    elif age <= 60:
+        return "51-60"
+    elif age <= 70:
+        return "61-70"
+    else: return "70+"
 
 def clean_consultations(input_file):
     '''Cleans eConsult data. File to be uploaded weekly '''
@@ -124,21 +124,6 @@ def clean_consultations(input_file):
     
     # Add divisional list size column to reason dataframe
     reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: division_list_size_lookup[x])
-
-    def age_bracket(age):
-        if age <= 20:
-            return "<20"
-        elif age <= 30:
-            return "21-30"
-        elif age <=40: 
-            return "31-40"
-        elif age <=50:
-            return "41-50"
-        elif age <= 60:
-            return "51-60"
-        elif age <= 70:
-            return "61-70"
-        else: return "70+"
 
     # Add age bracket column to reason dataframe
     reason_df['Age_Bracket'] = reason_df['Age'].apply(age_bracket)

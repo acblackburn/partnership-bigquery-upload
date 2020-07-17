@@ -51,26 +51,8 @@ def clean_budget(input_file):
     
     return df
           
-def age_bracket(age):
-    if age < 10:
-        return "0-10"
-    elif age <= 20:
-        return "11-20"
-    elif age <= 30:
-        return "21-30"
-    elif age <=40:
-        return "31-40"
-    elif age <=50:
-        return "41-50"
-    elif age <= 60:
-        return "51-60"
-    elif age <= 70:
-        return "61-70"
-    else:
-        return "70+"
-
 def clean_consultations(input_file):
-    '''Cleans eConsult data. File to be uploaded weekly '''
+    """Cleans eConsult data. File to be uploaded weekly."""
 
     # Open and load json metadata file
     with open("metadata.json") as json_file:
@@ -89,92 +71,68 @@ def clean_consultations(input_file):
     usage_df = pd.read_excel(input_file, sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
     reason_df = pd.read_excel(input_file, sheet_name='All Consults', dtype=pd_dtypes_reason)
 
-    # Remove empty rows and columns
-    empty_columns_usage = [col for col in usage_df if col.startswith('Unnamed')]
-    usage_df.drop(empty_columns_usage, axis=1, inplace=True)
-    usage_df.dropna(axis=0, how='all', inplace=True)
-    empty_columns_reason = [col for col in reason_df if col.startswith('Unnamed')]
-    reason_df.drop(empty_columns_reason, axis=1, inplace=True)
-    reason_df.dropna(axis=0, how='all', inplace=True)
+    # Read in ODS code, and List Size columns from NHSE
+    e_consult_nhse = pd.read_excel(input_file, sheet_name='NHSE', usecols =["ODS Code","List Size"], dtype={'List Size':"Int64"})
 
-    # Only need to read in relevant indentifyer, ods code, and list size
-    e_consult_nhse = pd.read_excel(input_file, sheet_name='NHSE', usecols = ["ODS Code","List Size"], dtype={'List Size':"Int64"})
+    # Remove empty rows from both DataFrames
+    usage_df.dropna(axis=0, how='all', inplace=True)
+    reason_df.dropna(axis=0, how='all', inplace=True)
 
     # Look up table for list size created from NHSE DataFrame
     list_size_lookup = {row[0]:row[1] for index,row in e_consult_nhse.iterrows()}
 
-    # Obtaining individual divisions
-    div = set(entry['DIV'] for entry in practice_lookup)
+    # Create set of unique Divisions
+    unique_divisions = set(entry['DIV'] for entry in practice_lookup)
 
-    # Division look up table created
-    division_list_size_lookup = {}
-    for division in div:
+    divisional_list_size_lookup = {}
+    for division in unique_divisions:
         for entry in practice_lookup:
             if entry['DIV'] == division: 
-                if division not in division_list_size_lookup:
-                    division_list_size_lookup[division] = list_size_lookup[entry['ODS Code']]
+                if division not in divisional_list_size_lookup:
+                    divisional_list_size_lookup[division] = list_size_lookup[entry['ODS Code']]
                 else: 
-                    division_list_size_lookup[division] += list_size_lookup[entry['ODS Code']]
+                    divisional_list_size_lookup[division] += list_size_lookup[entry['ODS Code']]
     
-    # Add division column to reason dataframe
+    # Add Division and Practice Code columns to Reason DataFrame
     reason_df['DIV'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lookup})
-   
-    # Add practice code column to reason dataframe
     reason_df['Code'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lookup})
 
-    # Add list size column to reason dataframe
+    # Add practice and divisional list size column to reason dataframe
     reason_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookup[x])
-    
-    # Add divisional list size column to reason dataframe
-    reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: division_list_size_lookup[x])
+    reason_df['Div_List'] = reason_df['DIV'].apply(lambda x: divisional_list_size_lookup[x])
 
     # Add age bracket column to reason dataframe
     reason_df['Age_Bracket'] = reason_df['Age'].apply(age_bracket)
     
-    # Reason per 1000 divisional size
+    # Reason per 1000 eConsults per divisional and practice list size
     reason_df['eConsult_1000_division'] = 1000 / reason_df['Div_List']
-
-    # Reason per 1000 practice list size
     reason_df['eConsult_1000_practice'] = 1000 / reason_df['List_Size']
 
     # Add singular month to reason dataframe
     reason_df['Month'] = reason_df['Date'].apply(lambda x: x.strftime("%B"))
 
-    # Fill reason diverted null values with No (N)
+    # Fill Reason Diverted column null values with No (N)
     reason_df['Diverted'] = reason_df['Diverted'].fillna("N")
 
-    # Reason time column cleaned to specified format
+    # Add Date and Time columns to Reason DataFrame cleaned to specified format
     reason_df['Time'] = reason_df['Time'].apply(lambda x: x.strftime('%H:%M:%S'))
-    
-    # Reason date column cleanedfrom timestamp to date format
     reason_df['Date'] = reason_df['Date'].apply(lambda x: x.date())
 
-    # Data for usage df
-    # To add division to usage dataframe
+    # Add Division and Practice Code to Usage DataFrame
     usage_df['DIV'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lookup})
-   
-    # Add practice code column to usage dataframe
     usage_df['Code'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lookup})
 
-    # Add list size column to usage dataframe
+    # Add List Size column to Usage DataFrame
     usage_df['List_Size'] = reason_df['ODS Code'].apply(lambda x: list_size_lookup[x])
 
-    # eConsults submitted per 1000 practice list size
+    # eConsults submitted per 1000 per practice List Size
     usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
     
-    # Month column specified as the 1st of each month in date format
-    # month = reason_df['Month'][0]
-    # year = reason_df['Date'][0].strftime("%Y")
-    # date = f"01/{month}/{year}"
-    # usage_df['Month'] = datetime.strptime(date,"%d/%B/%Y")
+    # Create Week_Month column in Date format
     usage_df['Week_Month'] = reason_df['Date'][0]
 
-    # Add EMIS or S1 column to usage dataframe
+    # Add EMIS or S1 column to Usage DataFrame
     usage_df['EMIS_S1'] = usage_df['ODS Code'].map({entry['ODS Code']:entry['EMIS/S1'] for entry in practice_lookup})
-
-    # Drop unused columns
-    reason_df = reason_df.drop(['ODS Code','Day of week'], axis=1)
-    usage_df = usage_df.drop(['ODS Code','Practice Id','Practice Type'], axis=1)
 
     # Rename columns for BigQuery
     usage_columns_rename = {entry['csv_name']:entry['bq_name'] for entry in reason_metadata}
@@ -182,4 +140,28 @@ def clean_consultations(input_file):
     reason_columns_rename = {entry['csv_name']:entry['bq_name'] for entry in usage_metadata}
     usage_df.rename(columns=reason_columns_rename, inplace=True)
 
+    # Drop columns not in BQ schema
+    required_usage_cols = [entry["bq_name"] for entry in usage_metadata if entry["bq_name"] != None]
+    required_reason_cols = [entry["bq_name"] for entry in reason_metadata if entry["bq_name"] != None]
+    usage_df.drop(columns=[col for col in usage_df if col not in required_usage_cols], inplace=True)
+    reason_df.drop(columns=[col for col in reason_df if col not in required_reason_cols], inplace=True)
+
     return usage_df, reason_df
+
+def age_bracket(age):
+    if age < 10:
+        return "0-10"
+    elif age <= 20:
+        return "11-20"
+    elif age <= 30:
+        return "21-30"
+    elif age <=40:
+        return "31-40"
+    elif age <=50:
+        return "41-50"
+    elif age <= 60:
+        return "51-60"
+    elif age <= 70:
+        return "61-70"
+    else:
+        return "70+"

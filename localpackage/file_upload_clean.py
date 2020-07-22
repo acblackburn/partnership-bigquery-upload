@@ -247,7 +247,69 @@ def clean_econsult_survey(input_file):
     return full_df
 
 def clean_econsult_comments(input_file):
-    pass
+    
+    class IndividualPracticeComments:
+    
+    def __init__(self, df):
+        
+        df.dropna(axis=0, how='all', inplace=True)
+        df.dropna(axis=1, how='all', inplace=True)
+        
+        self.name = df.iloc[0][0]
+        
+        if len(df.index) > 0:
+            df = df[1:]
+            df.reset_index(drop=True, inplace=True)
+            df = df.rename(columns={0:'Response', 1:'Comment'})
+            self.data = df
+        else:
+            self.data = None
+
+    # Read in raw patients comments df
+    patient_comments = pd.read_excel(
+        input_file,
+        sheet_name='Patient comments',
+        header=None
+    )
+
+    # Open practice metadata file
+    with open("practice_lookup.json") as json_file:
+            practice_lookup = json.load(json_file)
+
+    # Pull out month from the spreadsheet
+    workbook = xlrd.open_workbook(input_file)
+    worksheet = workbook.sheet_by_name('Patient feedback')
+    month_str = worksheet.cell(4, 1).value
+    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+
+    # Split input dataframe by practice
+    patient_comment_df_list = np.split(patient_comments, patient_comments[patient_comments.isnull().all(1)].index)
+
+    # Create empty dataframe to append each cleaned question to
+    full_df = pd.DataFrame()
+
+    for df in patient_comment_df_list:
+        # Create practice comment instance for each 
+        practice = IndividualPracticeComments(df)
+
+        if practice.data is None:
+            continue
+
+        practice.data["Month"] = month
+        practice.data["Practice"] = practice.name
+        practice.data['DIV'] = practice.data['Practice'].map({entry['practice_name']:entry['DIV'] for entry in practice_lookup})
+        practice.data['Practice_Code'] = practice.data['Practice'].map({entry['practice_name']:entry['practice_code'] for entry in practice_lookup})
+
+        full_df = full_df.append(practice.data)
+
+    # Reorder columns
+    full_df = full_df.reindex(
+        columns=['Month', 'DIV', 'Practice_Code', 'Practice', 'Response', 'Comment']
+    )
+
+    full_df.reset_index(drop=True, inplace=True)
+
+    return full_df
 
 def age_bracket(age):
     if age < 10:

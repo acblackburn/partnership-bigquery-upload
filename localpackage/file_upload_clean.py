@@ -153,6 +153,7 @@ def clean_econsult_survey(input_file):
 
     class FeedbackQuestion:
     """Creates object containing a question (string) and question data (dataframe)."""
+        
         def __init__(self, df):
             self.question = df.iloc[0][0]
             
@@ -249,21 +250,22 @@ def clean_econsult_survey(input_file):
 def clean_econsult_comments(input_file):
     
     class IndividualPracticeComments:
-    
-    def __init__(self, df):
+    """Creates object containing practice name and a DataFrame of patient comments."""
         
-        df.dropna(axis=0, how='all', inplace=True)
-        df.dropna(axis=1, how='all', inplace=True)
-        
-        self.name = df.iloc[0][0]
-        
-        if len(df.index) > 0:
-            df = df[1:]
-            df.reset_index(drop=True, inplace=True)
-            df = df.rename(columns={0:'Response', 1:'Comment'})
-            self.data = df
-        else:
-            self.data = None
+        def __init__(self, df):
+            
+            df.dropna(axis=0, how='all', inplace=True)
+            df.dropna(axis=1, how='all', inplace=True)
+            
+            self.name = df.iloc[0][0]
+            
+            if len(df.index) > 0:
+                df = df[1:]
+                df.reset_index(drop=True, inplace=True)
+                df = df.rename(columns={0:'Response', 1:'Comment'})
+                self.data = df
+            else:
+                self.data = None
 
     # Read in raw patients comments df
     patient_comments = pd.read_excel(

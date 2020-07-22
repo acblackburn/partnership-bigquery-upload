@@ -467,5 +467,109 @@
       "bq_name": "eConsults_submitted_1000",
       "bq_dtype": "FLOAT"
     }
+  ],
+
+  "patient_feedback_response": [
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Month",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "DIV",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Practice_Code",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Practice",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Question",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Response",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Number_of_Responses",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Response_Index",
+      "bq_dtype": "Integer"
+    }
+  ],
+
+  "patient_feedback_comments": [
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Month",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "DIV",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Practice_Code",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Practice",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Response",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "Comment",
+      "bq_dtype": "STRING"
+    }
   ]
 }

@@ -52,7 +52,7 @@ def clean_budget(input_file):
     return df
           
 def clean_econsult_activity(input_file):
-    """Cleans eConsult data. File to be uploaded weekly."""
+    """Cleans weekly eConsult activity data. File to be uploaded weekly."""
 
     # Open and load json metadata file
     with open("metadata.json") as json_file:
@@ -149,9 +149,10 @@ def clean_econsult_activity(input_file):
     return usage_df, reason_df
 
 def clean_econsult_survey(input_file):
-    
+"""Cleans monthly eConsult patient feedback data. File to be uploaded monthly."""    
+
     class FeedbackQuestion:
-    
+    """Creates object containing a question (string) and question data (dataframe)."""
         def __init__(self, df):
             self.question = df.iloc[0][0]
             
@@ -176,13 +177,17 @@ def clean_econsult_survey(input_file):
         def remove_grandtotal(self):
             """Removes Grand Total rows from each question sub-dataframe"""
             self.data = self.data[self.data.Practice != "Grand Total"]
+    
+    with open("metadata.json") as json_file:
+        data = json.load(json_file)
+        survey_metadata = data['']
 
     # Open practice metadata file
     with open("practice_lookup.json") as json_file:
             practice_lookup = json.load(json_file)
 
     patient_feedback = pd.read_excel(
-        "data/eConsult patient survey report for Modality - 20200601-20200630.xlsx",
+        input_file,
         sheet_name="Patient feedback",
         header=None,
         skiprows=16
@@ -191,7 +196,7 @@ def clean_econsult_survey(input_file):
     patient_feedback.dropna(axis=1, how='all', inplace=True)
 
     # Pull out month from the spreadsheet
-    workbook = xlrd.open_workbook("data/eConsult patient survey report for Modality - 20200601-20200630.xlsx")
+    workbook = xlrd.open_workbook(input_file)
     worksheet = workbook.sheet_by_name('Patient feedback')
     month_str = worksheet.cell(4, 1).value
     month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
@@ -238,6 +243,8 @@ def clean_econsult_survey(input_file):
     )
 
     full_df['Number_of_Responses'] = full_df['Number_of_Responses'].astype(int)
+
+    return full_df
 
 def clean_econsult_comments(input_file):
     pass

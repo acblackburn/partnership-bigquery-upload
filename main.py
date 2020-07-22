@@ -7,10 +7,14 @@ def main(data, context):
     if file_path == "Budget":
         df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_budget, "Finance", "Budget")
-    if file_path == "eConsult":
+    elif file_path == "eConsult/Activity":
         df_usage, df_reason = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_usage, "eConsult", "Usage")
         df_to_gbq(df_reason, "eConsult", "Reason")
+    elif file_path == "eConsult/Patient_Survey":
+        pass
+    elif file_path == "eConsult/Patient_Comments":
+        pass
 
     delete_blob(data['bucket'], data['name'])
 

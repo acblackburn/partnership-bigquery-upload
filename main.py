@@ -16,7 +16,7 @@ def main(data, context):
     elif file_path == "eConsult/Patient_Comments":
         pass
 
-    delete_blob(data['bucket'], data['name'])
+    # delete_blob(data['bucket'], data['name'])
 
 # def main():
 #     data = "data/eConsult_usage_report_July_02.xlsx"

@@ -328,5 +328,7 @@ def age_bracket(age):
         return "51-60"
     elif age <= 70:
         return "61-70"
+    elif age <= 80:
+        return "70-80"
     else:
-        return "70+"
+        return "80+"

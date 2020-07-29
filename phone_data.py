@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import xlrd
 import json
+from google.cloud import bigquery
 
 # Open raw excel data
 raw_df = pd.read_excel(
@@ -58,4 +59,22 @@ for df in df_list:
 
 full_df.reset_index(drop=True, inplace=True)
 
-full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
+# full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
+
+bq_client = bigquery.Client(project="modalitydashboards")
+table_id = f"modalitydashboards.phone_data.example_month"
+
+schema = [
+    bigquery.SchemaField(),
+    ...
+]
+
+job_config = bigquery.LoadJobConfig(schema=schema)
+
+# Load DataFrame in BigQuery
+job = bq_client.load_table_from_dataframe(
+    full_df, table_id, job_config=job_config
+)
+
+# Wait for load job to complete
+job.result()

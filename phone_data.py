@@ -42,7 +42,7 @@ for df in df_list:
         call_data.columns.name = None
         
         # Add 'Call_Direction' and 'Location' columns
-        call_data['Call_Direction'] = call_info[8]
+        call_data['Call_direction'] = call_info[8]
         call_data['Location'] = call_info[14]
 
         # Convert 'Start time' column to datetime format
@@ -61,23 +61,30 @@ full_df.reset_index(drop=True, inplace=True)
 
 full_df.columns = full_df.columns.str.replace(' ', '_')
 
-print(full_df.dtypes)
 # full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
 
-# bq_client = bigquery.Client(project="modalitydashboards")
-# table_id = f"modalitydashboards.phone_data.example_month"
+bq_client = bigquery.Client(project="modalitydashboards")
+table_id = f"modalitydashboards.phone_data.example_month"
 
-# schema = [
-#     bigquery.SchemaField(),
-#     ...
-# ]
+schema = [
+    bigquery.SchemaField("Start_time", "TIMESTAMP"),
+    bigquery.SchemaField("Duration", "STRING"),
+    bigquery.SchemaField("Event_type", "STRING"),
+    bigquery.SchemaField("Device_type", "STRING"),
+    bigquery.SchemaField("Reporting", "STRING"),
+    bigquery.SchemaField("Full_name", "STRING"),
+    bigquery.SchemaField("Comment", "STRING"),
+    bigquery.SchemaField("Call_direction", "STRING"),
+    bigquery.SchemaField("Location", "STRING"),
+    bigquery.SchemaField("Call_ID", "STRING")
+]
 
-# job_config = bigquery.LoadJobConfig(schema=schema)
+job_config = bigquery.LoadJobConfig(schema=schema)
 
-# # Load DataFrame in BigQuery
-# job = bq_client.load_table_from_dataframe(
-#     full_df, table_id, job_config=job_config
-# )
+# Load DataFrame in BigQuery
+job = bq_client.load_table_from_dataframe(
+    full_df, table_id, job_config=job_config
+)
 
-# # Wait for load job to complete
-# job.result()
+# Wait for load job to complete
+job.result()

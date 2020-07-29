@@ -44,9 +44,8 @@ for df in df_list:
         call_data['Call_Direction'] = call_info[8]
         call_data['Location'] = call_info[14]
 
-        # Convert 'Start time' and 'Duration' columns to datetime formats
+        # Convert 'Start time' column to datetime format
         call_data['Start time'] = pd.to_datetime(call_data['Start time'], format="%d/%m/%Y %H:%M:%S")
-        call_data['Duration'] = pd.to_timedelta(call_data['Duration'])
 
         # Create a unique ID for each call
         call_data['Call_ID'] = call_data['Start time'].dt.strftime(f"%Y%m{call_no:04}")
@@ -58,3 +57,5 @@ for df in df_list:
         call_no += 1
 
 full_df.reset_index(drop=True, inplace=True)
+
+full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)

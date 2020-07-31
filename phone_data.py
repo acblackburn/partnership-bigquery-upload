@@ -52,27 +52,27 @@ for df in df_list:
         call_data['Call_ID'] = call_data['Start time'].dt.strftime(f"%Y%m{call_no:04}")
 
         new_row = {
-            'Start time': call_data[0]['Start time'],
-            'Event type': 'Call initiated',
-            'Duration': '00:00:00',
-            'Call_direction': call_data[0]['Call_direction'],
-            'Location': call_data[0]['Location'],
-            'Call_ID': call_data[0]['Call_ID']
+            'Start time': [call_data.iloc[0, 0]],
+            'Event type': ['Call initiated'],
+            'Duration': ['00:00:00'],
+            'Call_direction': [call_data.iloc[0, 7]],
+            'Location': [call_data.iloc[0, 8]],
+            'Call_ID': [call_data.iloc[0, 9]]
             }
 
-        print(new_row)
+        call_data = pd.concat([pd.DataFrame(new_row), call_data], ignore_index=True)
         
         # Append each call DataFrame to the full DataFrame
-        # full_df = full_df.append(call_data)
+        full_df = full_df.append(call_data)
 
         # Increment call counter
         call_no += 1
 
-# full_df.reset_index(drop=True, inplace=True)
+full_df.reset_index(drop=True, inplace=True)
 
-# full_df.columns = full_df.columns.str.replace(' ', '_')
+full_df.columns = full_df.columns.str.replace(' ', '_')
 
-# # full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
+full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
 
 # bq_client = bigquery.Client(project="modalitydashboards")
 # table_id = f"modalitydashboards.phone_data.example_month"

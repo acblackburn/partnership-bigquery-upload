@@ -71,6 +71,13 @@
       "bq_dtype": "FLOAT"
     },
     {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Period",
+      "pd_dtype": "Float64",
+      "bq_name": "Period",
+      "bq_dtype": "FLOAT"
+    },
+    {
       "description": "[Income or expense]",
       "csv_name": "Income / Expenses",
       "pd_dtype": "str",

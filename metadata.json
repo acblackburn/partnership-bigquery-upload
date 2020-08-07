@@ -585,5 +585,70 @@
       "bq_name": "Comment",
       "bq_dtype": "STRING"
     }
+  ],
+  "queing_table": [
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "date",
+      "bq_dtype": "DATE"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "hour",
+      "bq_dtype": "STRING"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "arrival_rate",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "service_rate_hour",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "calc_waiting_time",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "avg_waiting_time",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "capacity",
+      "bq_dtype": "INTEGER"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "utilisation_rate",
+      "bq_dtype": "FLOAT"
+    },
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": null,
+      "pd_dtype": null,
+      "bq_name": "idle_rate",
+      "bq_dtype": "FLOAT"
+    }
   ]
 }

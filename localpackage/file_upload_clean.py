@@ -95,7 +95,7 @@ def clean_budget(input_file):
     df = df.sort_values('Date', ignore_index=True)
     
     return df
-clean_budget('MODGRP - June 20 TB data.xlsx')
+#clean_budget('MODGRP - June 20 TB data.xlsx')
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""

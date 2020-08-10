@@ -281,8 +281,8 @@ def clean_econsult_comments(input_file):
     # Pull out month from the spreadsheet
     workbook = xlrd.open_workbook(input_file)
     worksheet = workbook.sheet_by_name('Patient feedback')
-    month_str = worksheet.cell(4, 1).value
-    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+    month_str = worksheet.cell(4, 1).value[:28]
+    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y").date()
 
     # Split input dataframe by practice
     patient_comment_df_list = np.split(patient_comments, patient_comments[patient_comments.isnull().all(1)].index)

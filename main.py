@@ -12,11 +12,13 @@ def main(data, context):
         df_to_gbq(df_usage, "eConsult", "Usage")
         df_to_gbq(df_reason, "eConsult", "Reason")
     elif file_path == "eConsult/Patient_Survey":
-        pass
+        df_activity = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_activity, "eConsult", "patient_feedback_response")
     elif file_path == "eConsult/Patient_Comments":
-        pass
-
-    # delete_blob(data['bucket'], data['name'])
+        df_comments = fc.clean_econsult_comments(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_comments, "eConsult", "patient_feedback_comments")
+    
+    delete_blob(data['bucket'], data['name'])
 
 # def main():
 #     data = "data/eConsult_usage_report_July_02.xlsx"

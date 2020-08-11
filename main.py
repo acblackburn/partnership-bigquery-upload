@@ -21,10 +21,10 @@ def main(data, context):
     
     delete_blob(data['bucket'], data['name'])
 
-def main():
-    data = "phone_data_clean.csv"
-    df_queue = queing_table(data)
-    df_to_gbq(df_queue, "phone_data", "queing_table")
+# def main():
+#     data = "phone_data_clean.csv"
+#     df_queue = queing_table(data)
+#     df_to_gbq(df_queue, "phone_data", "queing_table")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

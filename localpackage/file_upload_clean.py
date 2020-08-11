@@ -41,7 +41,6 @@ def clean_budget(input_file):
 
     #create division map for weighted and raw
     #first create dict for unique divs
-    
     div = list_size_table['Div'].unique()
 
     div_list_size_weighted = {}
@@ -60,7 +59,6 @@ def clean_budget(input_file):
     df['Divisional_Weighted_List_Size'] = df['Dp'].map(div_list_size_weighted)
     df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
 
-    print(list_size_table)
     #for practice map all practices from the tabel
     prac_list_size_weighted = pd.Series(list_size_table['Weighted'],index=list_size_table['Cost code']).to_dict()
     prac_list_size_raw = pd.Series(list_size_table['Raw'],index=list_size_table['Cost code']).to_dict()

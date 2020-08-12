@@ -139,4 +139,4 @@ def phone__data_clean(input_file):
         if "IVR Enter" in group["Event type"].unique() and "Answer ACD" not in group["Event type"].unique():
                 group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
 
-phone__data_clean('phone_data_clean.csv')
+# phone__data_clean('phone_data_clean.csv')

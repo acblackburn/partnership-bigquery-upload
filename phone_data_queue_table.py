@@ -140,4 +140,4 @@ def phone__data_clean(input_file):
             group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
             print(group['Call_Dropped'][group["Event type"] == "IVR Enter"])
 
-phone__data_clean('phone_data_clean.csv')
+# phone__data_clean('phone_data_clean.csv')

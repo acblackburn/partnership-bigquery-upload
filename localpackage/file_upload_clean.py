@@ -14,14 +14,12 @@ def clean_budget(input_file):
     
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
-    
+   
     df = pd.read_excel(
         input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
         )
-    
-    # Remove empty rows and columns
-    #empty_columns = [col for col in df if col.startswith('Unnamed')]
-    #df.drop(empty_columns, axis=1, inplace=True)
+  
+    # Remove empty rows
     df.dropna(axis=0, how='all', inplace=True)
 
     # Parse 'Date' column from 'Month' and 'Year' columns
@@ -29,54 +27,56 @@ def clean_budget(input_file):
     df['Date'] = pd.to_datetime(df['Date'], format="%B/%Y")
 
     # Create a numerical month column from the above created date column
-    df['MonthNumeric'] = df['Date'].dt.strftime("%m")
+    df['Month_Numeric'] = df['Date'].dt.strftime("%m")
 
     # Make sure Division and CC columns are in uppercase format
     df['Dp'] = df['Dp'].str.upper()
     df['CC'] = df['CC'].str.upper()
 
-    #Add list size to columns
-    #read in oly relvant columns, list size, div, practice (columns in F and G are the ones being read in)
+    # Add list size to columns
+    # read in only relevant columns, list size, div, practice (columns in F and G are the ones being read in)
     list_size_table = pd.read_excel(input_file, sheet_name = 'list_size', skiprows = 4, usecols = [3,4,6,7])
 
-    #create division map for weighted and raw
-    #first create dict for unique divs
-    div = list_size_table['Div'].unique()
+    # create division map for weighted and raw
+    # first create dict for unique divs
+    divisions = list_size_table['Div'].unique()
 
     div_list_size_weighted = {}
     div_list_size_raw = {}
-    for division in div:
-        div_list_size_weighted[division] = 0
-        div_list_size_raw[division] = 0
+    
     for index,row in list_size_table.iterrows():
-        div = row[1]
+        division = row[1]
         weighted = row[2]
         raw = row[3]
         
-        div_list_size_weighted[div] += weighted
-        div_list_size_raw[division] += raw
+        if division in div_list_size_weighted:
+            div_list_size_weighted[division] += weighted
+            div_list_size_raw[division] += raw
+        else:
+            div_list_size_weighted[division] = weighted
+            div_list_size_raw[division] = raw
     
     df['Divisional_Weighted_List_Size'] = df['Dp'].map(div_list_size_weighted)
     df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
 
-    #for practice map all practices from the tabel
+    # For practice map all practices from the table
     prac_list_size_weighted = pd.Series(list_size_table['Weighted'],index=list_size_table['Cost code']).to_dict()
     prac_list_size_raw = pd.Series(list_size_table['Raw'],index=list_size_table['Cost code']).to_dict()
 
     df['Practice_Weighted_List_Size'] = df['Dp'].map(prac_list_size_weighted)
     df['Practice_Raw_List_Size'] = df['Dp'].map(prac_list_size_raw)
 
-    #Creating YTD/1000 views
-    df["YTD_divisional_raw_1000"] = 1000*df['YTD']/df['Divisional_Raw_List_Size']
-    df["YTD_divisional_weighted_1000"] = 1000*df['YTD']/df['Divisional_Weighted_List_Size']
-    df["YTD_practice_weighted_1000"] = 1000*df['YTD']/df['Practice_Weighted_List_Size']
-    df["YTD_practice_raw_1000"] = 1000*df['YTD']/df['Practice_Raw_List_Size']
+    # Creating YTD/1000 columns
+    df["YTD_Divisional_Raw_1000"] = 1000*df['YTD']/df['Divisional_Raw_List_Size']
+    df["YTD_Divisional_Weighted_1000"] = 1000*df['YTD']/df['Divisional_Weighted_List_Size']
+    df["YTD_Practice_Weighted_1000"] = 1000*df['YTD']/df['Practice_Weighted_List_Size']
+    df["YTD_Practice_Raw_1000"] = 1000*df['YTD']/df['Practice_Raw_List_Size']
 
-    #Creating Period/1000 views
-    df["Period_divisional_raw_1000"] = 1000*df['Period']/df['Divisional_Raw_List_Size']
-    df["Period_divisional_weighted_1000"] = 1000*df['Period']/df['Divisional_Weighted_List_Size']
-    df["Period_practice_weighted_1000"] = 1000*df['Period']/df['Practice_Weighted_List_Size']
-    df["Period_practice_raw_1000"] = 1000*df['Period']/df['Practice_Raw_List_Size']
+    # Creating Period/1000 columns
+    df["Period_Divisional_Raw_1000"] = 1000*df['Period']/df['Divisional_Raw_List_Size']
+    df["Period_Divisional_Weighted_1000"] = 1000*df['Period']/df['Divisional_Weighted_List_Size']
+    df["Period_Practice_Weighted_1000"] = 1000*df['Period']/df['Practice_Weighted_List_Size']
+    df["Period_Practice_Raw_1000"] = 1000*df['Period']/df['Practice_Raw_List_Size']
 
     # Rename columns from csv_name to bq_name
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}

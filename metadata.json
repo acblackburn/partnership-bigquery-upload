@@ -85,101 +85,101 @@
       "bq_dtype": "STRING"
     },
     {
-      "description": "[List Size for the practice in weighted form]",
+      "description": "List Size for the practice in weighted form",
       "csv_name": null,
       "pd_dtype": null,
       "bq_name": "Period_Weighted_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[List Size for the practice in raw form]",
+      "description": "List Size for the practice in raw form",
       "csv_name": null,
       "pd_dtype": null,
       "bq_name": "Practice_Raw_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[List Size for the division in weighted form]",
+      "description": "List Size for the division in weighted form",
       "csv_name": null,
       "pd_dtype": null,
       "bq_name": "Divisional_Weighted_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[List Size for the division in raw form]",
+      "description": "List Size for the division in raw form",
       "csv_name": null,
       "pd_dtype": null,
       "bq_name": "Divisional_Raw_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the WEIGHTED list size of the practice per 1000 patient]",
+      "description": "The year to date scaled by the WEIGHTED list size of the practice per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "YTD_practice_weighted_1000",
+      "bq_name": "YTD_Practice_Weighted_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the list size of the practice per 1000 patient]",
+      "description": "The year to date scaled by the list size of the practice per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "YTD_practice_raw_1000",
+      "bq_name": "YTD_Practice_Raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the WEIGHTED list size of the division per 1000 patient]",
+      "description": "The year to date scaled by the WEIGHTED list size of the division per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "YTD_divisional_weighted_1000",
+      "bq_name": "YTD_Divisional_Weighted_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the list size of the division per 1000 patient]",
+      "description": "The year to date scaled by the list size of the division per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "YTD_divisional_raw_1000",
+      "bq_name": "YTD_Divisional_Raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the WEIGHTED list size of the practice per 1000 patient]",
+      "description": "The year to date scaled by the WEIGHTED list size of the practice per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Period_practice_weighted_1000",
+      "bq_name": "Period_Practice_Weighted_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the list size of the practice per 1000 patient]",
+      "description": "The year to date scaled by the list size of the practice per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Period_practice_raw_1000",
+      "bq_name": "Period_Practice_Raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the WEIGHTED list size of the division per 1000 patient]",
+      "description": "The year to date scaled by the WEIGHTED list size of the division per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Period_divisional_weighted_1000",
+      "bq_name": "Period_Divisional_Weighted_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The year to date scaled by the list size of the division per 1000 patient]",
+      "description": "The year to date scaled by the list size of the division per 1000 patient",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Period_divisional_raw_1000",
+      "bq_name": "Period_Divisional_Raw_1000",
       "bq_dtype": "FLOAT"
     },
     {
-      "description": "[The date of the budget]",
+      "description": "The date of the budget",
       "csv_name": null,
       "pd_dtype": null,
       "bq_name": "Date",
       "bq_dtype": "DATE"
     },
     {
-      "description": "[The numeric value of the month. Not including year e.g. (January = 1)]",
+      "description": "The numeric value of the month. Not including year e.g. (January = 1)",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "MonthNumeric",
+      "bq_name": "Month_Numeric",
       "bq_dtype": "STRING"
     }
    ],

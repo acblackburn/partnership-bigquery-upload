@@ -133,11 +133,10 @@ def phone__data_clean(input_file):
     df = pd.read_csv(input_file)
     
     df['Call_Dropped'] = 0
-    df.groupby(df['Call_ID'])
+    df = df.groupby('Call_ID')
 
-    for name, group in df:
-        if "IVR Enter" in group["Event type"] and "Answer ACD" not in group["Event type"]:
-            group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
-            print(group['Call_Dropped'][group["Event type"] == "IVR Enter"])
+    for name,group in df:
+        if "IVR Enter" in group["Event type"].unique() and "Answer ACD" not in group["Event type"].unique():
+                group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
 
 phone__data_clean('phone_data_clean.csv')

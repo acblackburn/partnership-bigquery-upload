@@ -127,4 +127,17 @@ def queing_table(input_file):
     df_queue = pd.DataFrame(rows_df)
     df_queue['date'] = datetime.strptime(f'01/{month}/{year}', '%d/%B/%Y')
     return df_queue
-queing_table('phone_data_clean.csv')
+
+def phone__data_clean(input_file):
+    #read data in 
+    df = pd.read_csv(input_file)
+    
+    df['Call_Dropped'] = 0
+    df.groupby(df['Call_ID'])
+
+    for name, group in df:
+        if "IVR Enter" in group["Event type"] and "Answer ACD" not in group["Event type"]:
+            group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
+            print(group['Call_Dropped'][group["Event type"] == "IVR Enter"])
+
+phone__data_clean('phone_data_clean.csv')

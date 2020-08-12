@@ -72,16 +72,6 @@ full_df.reset_index(drop=True, inplace=True)
 
 full_df.columns = full_df.columns.str.replace(' ', '_')
 
-full_df['Call_Dropped'] = 0
-
-full_df.groupby('Call_ID')
-
-for name, group in full_df:
-    if "IVR Enter" in group["Event type"] and "Answer ACD" not in group["Event type"]:
-        group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
-        print(group['Call_Dropped'][group["Event type"] == "IVR Enter"])
-
-
 
 # # full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
 

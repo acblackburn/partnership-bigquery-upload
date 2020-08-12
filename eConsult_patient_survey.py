@@ -5,6 +5,8 @@ import pandas as pd
 from google.cloud import bigquery
 from datetime import datetime
 
+data = "data/eConsult patient survey report for Modality - 20200701-20200731.xlsx"
+
 class FeedbackQuestion:
     
     def __init__(self, df):
@@ -37,7 +39,7 @@ with open("practice_lookup.json") as json_file:
         practice_lookup = json.load(json_file)
 
 patient_feedback = pd.read_excel(
-    "data/eConsult patient survey report for Modality - 20200601-20200630.xlsx",
+    data,
     sheet_name="Patient feedback",
     header=None,
     skiprows=16
@@ -46,10 +48,10 @@ patient_feedback = pd.read_excel(
 patient_feedback.dropna(axis=1, how='all', inplace=True)
 
 # Pull out month from the spreadsheet
-workbook = xlrd.open_workbook("data/eConsult patient survey report for Modality - 20200601-20200630.xlsx")
+workbook = xlrd.open_workbook(data)
 worksheet = workbook.sheet_by_name('Patient feedback')
-month_str = worksheet.cell(4, 1).value
-month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+month_str = worksheet.cell(4, 1).value[:28]
+month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y").date()
 
 # Split each patient feedback question into individual dataframes
 patient_feedback_df_list = np.split(patient_feedback, patient_feedback[patient_feedback.isnull().all(1)].index)

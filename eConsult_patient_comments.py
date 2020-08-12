@@ -5,8 +5,10 @@ import xlrd
 from datetime import datetime
 from google.cloud import bigquery
 
+data = "data/eConsult patient survey report for Modality - 20200701-20200731.xlsx"
+
 patient_comments = pd.read_excel(
-    "data/eConsult patient survey report for Modality - 20200601-20200630.xlsx",
+    data,
     sheet_name='Patient comments',
     header=None
 )
@@ -16,10 +18,10 @@ with open("practice_lookup.json") as json_file:
         practice_lookup = json.load(json_file)
 
 # Pull out month from the spreadsheet
-workbook = xlrd.open_workbook("data/eConsult patient survey report for Modality - 20200601-20200630.xlsx")
+workbook = xlrd.open_workbook(data)
 worksheet = workbook.sheet_by_name('Patient feedback')
-month_str = worksheet.cell(4, 1).value
-month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+month_str = worksheet.cell(4, 1).value[:28]
+month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y").date()
 
 class IndividualPracticeComments:
     

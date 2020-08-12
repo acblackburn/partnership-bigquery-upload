@@ -50,6 +50,17 @@ for df in df_list:
 
         # Create a unique ID for each call
         call_data['Call_ID'] = call_data['Start time'].dt.strftime(f"%Y%m{call_no:04}")
+
+        new_row = {
+            'Start time': [call_data.iloc[0, 0]],
+            'Event type': ['Call initiated'],
+            'Duration': ['00:00:00'],
+            'Call_direction': [call_data.iloc[0, 7]],
+            'Location': [call_data.iloc[0, 8]],
+            'Call_ID': [call_data.iloc[0, 9]]
+            }
+
+        call_data = pd.concat([pd.DataFrame(new_row), call_data], ignore_index=True)
         
         # Append each call DataFrame to the full DataFrame
         full_df = full_df.append(call_data)

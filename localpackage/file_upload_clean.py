@@ -20,8 +20,8 @@ def clean_budget(input_file):
         )
     
     # Remove empty rows and columns
-    empty_columns = [col for col in df if col.startswith('Unnamed')]
-    df.drop(empty_columns, axis=1, inplace=True)
+    #empty_columns = [col for col in df if col.startswith('Unnamed')]
+    #df.drop(empty_columns, axis=1, inplace=True)
     df.dropna(axis=0, how='all', inplace=True)
 
     # Parse 'Date' column from 'Month' and 'Year' columns
@@ -34,6 +34,49 @@ def clean_budget(input_file):
     # Make sure Division and CC columns are in uppercase format
     df['Dp'] = df['Dp'].str.upper()
     df['CC'] = df['CC'].str.upper()
+
+    #Add list size to columns
+    #read in oly relvant columns, list size, div, practice (columns in F and G are the ones being read in)
+    list_size_table = pd.read_excel(input_file, sheet_name = 'list_size', skiprows = 4, usecols = [3,4,6,7])
+
+    #create division map for weighted and raw
+    #first create dict for unique divs
+    div = list_size_table['Div'].unique()
+
+    div_list_size_weighted = {}
+    div_list_size_raw = {}
+    for division in div:
+        div_list_size_weighted[division] = 0
+        div_list_size_raw[division] = 0
+    for index,row in list_size_table.iterrows():
+        div = row[1]
+        weighted = row[2]
+        raw = row[3]
+        
+        div_list_size_weighted[div] += weighted
+        div_list_size_raw[division] += raw
+    
+    df['Divisional_Weighted_List_Size'] = df['Dp'].map(div_list_size_weighted)
+    df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
+
+    #for practice map all practices from the tabel
+    prac_list_size_weighted = pd.Series(list_size_table['Weighted'],index=list_size_table['Cost code']).to_dict()
+    prac_list_size_raw = pd.Series(list_size_table['Raw'],index=list_size_table['Cost code']).to_dict()
+
+    df['Practice_Weighted_List_Size'] = df['Dp'].map(prac_list_size_weighted)
+    df['Practice_Raw_List_Size'] = df['Dp'].map(prac_list_size_raw)
+
+    #Creating YTD/1000 views
+    df["YTD_divisional_raw_1000"] = 1000*df['YTD']/df['Divisional_Raw_List_Size']
+    df["YTD_divisional_weighted_1000"] = 1000*df['YTD']/df['Divisional_Weighted_List_Size']
+    df["YTD_practice_weighted_1000"] = 1000*df['YTD']/df['Practice_Weighted_List_Size']
+    df["YTD_practice_raw_1000"] = 1000*df['YTD']/df['Practice_Raw_List_Size']
+
+    #Creating Period/1000 views
+    df["Period_divisional_raw_1000"] = 1000*df['Period']/df['Divisional_Raw_List_Size']
+    df["Period_divisional_weighted_1000"] = 1000*df['Period']/df['Divisional_Weighted_List_Size']
+    df["Period_practice_weighted_1000"] = 1000*df['Period']/df['Practice_Weighted_List_Size']
+    df["Period_practice_raw_1000"] = 1000*df['Period']/df['Practice_Raw_List_Size']
 
     # Rename columns from csv_name to bq_name
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}
@@ -50,7 +93,8 @@ def clean_budget(input_file):
     df = df.sort_values('Date', ignore_index=True)
     
     return df
-          
+#clean_budget('MODGRP - June 20 TB data.xlsx')
+
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""
 
@@ -149,10 +193,10 @@ def clean_econsult_activity(input_file):
     return usage_df, reason_df
 
 def clean_econsult_survey(input_file):
-"""Cleans monthly eConsult patient feedback data. File to be uploaded monthly."""    
+    """Cleans monthly eConsult patient feedback data. File to be uploaded monthly."""    
 
     class FeedbackQuestion:
-    """Creates object containing a question (string) and question data (dataframe)."""
+        """Creates object containing a question (string) and question data (dataframe)."""
         
         def __init__(self, df):
             self.question = df.iloc[0][0]
@@ -199,8 +243,8 @@ def clean_econsult_survey(input_file):
     # Pull out month from the spreadsheet
     workbook = xlrd.open_workbook(input_file)
     worksheet = workbook.sheet_by_name('Patient feedback')
-    month_str = worksheet.cell(4, 1).value
-    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+    month_str = worksheet.cell(4, 1).value[:28]
+    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y").date()
 
     # Split each patient feedback question into individual dataframes
     patient_feedback_df_list = np.split(patient_feedback, patient_feedback[patient_feedback.isnull().all(1)].index)
@@ -250,7 +294,7 @@ def clean_econsult_survey(input_file):
 def clean_econsult_comments(input_file):
     
     class IndividualPracticeComments:
-    """Creates object containing practice name and a DataFrame of patient comments."""
+        """Creates object containing practice name and a DataFrame of patient comments."""
         
         def __init__(self, df):
             
@@ -281,8 +325,8 @@ def clean_econsult_comments(input_file):
     # Pull out month from the spreadsheet
     workbook = xlrd.open_workbook(input_file)
     worksheet = workbook.sheet_by_name('Patient feedback')
-    month_str = worksheet.cell(4, 1).value
-    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y - 30/06/2020").date()
+    month_str = worksheet.cell(4, 1).value[:28]
+    month = datetime.strptime(month_str, "Reporting period: %d/%m/%Y").date()
 
     # Split input dataframe by practice
     patient_comment_df_list = np.split(patient_comments, patient_comments[patient_comments.isnull().all(1)].index)

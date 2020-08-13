@@ -88,7 +88,7 @@
       "description": "List Size for the practice in weighted form",
       "csv_name": null,
       "pd_dtype": null,
-      "bq_name": "Period_Weighted_List_Size",
+      "bq_name": "Practice_Weighted_List_Size",
       "bq_dtype": "FLOAT"
     },
     {
@@ -183,7 +183,7 @@
       "bq_dtype": "STRING"
     }
    ],
-   
+
   "Reason":[
     {
       "description": "[DESCRIPTION]",

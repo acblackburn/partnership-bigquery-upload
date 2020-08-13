@@ -14,6 +14,10 @@ df = pd.read_csv("~/Desktop/Budgetv1.csv")
 # Remove empty rows
 df.dropna(axis=0, how='all', inplace=True)
 
+df['Year'] = df['Year'].astype(str)
+df['CAT'] = df['CAT'].astype(str)
+df['Reporting_Code'] = df['Reporting_Code'].astype(str)
+
 missing_period_cols = [
         'Period',
         'Period_Practice_Weighted_1000',

@@ -34,7 +34,7 @@ def clean_budget(input_file):
     df['CC'] = df['CC'].str.upper()
 
     # Read in relevant list size data
-    list_size_table = pd.read_excel(input_file, sheet_name='list_size', skiprows=4, usecols=[3,4,6,7])
+    list_size_table = pd.read_excel(input_file, sheet_name=1, skiprows=4, usecols=[3,4,6,7])
 
     # Create a list of unique divisions
     divisions = list_size_table['Div'].unique()

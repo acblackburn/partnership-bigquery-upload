@@ -11,14 +11,14 @@ def clean_budget(input_file):
     with open("metadata.json") as json_file:
         data = json.load(json_file)
         budget_metadata = data['Budget']
-    
+
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
-   
+
     df = pd.read_excel(
         input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
         )
-  
+
     # Remove empty rows
     df.dropna(axis=0, how='all', inplace=True)
 
@@ -33,29 +33,27 @@ def clean_budget(input_file):
     df['Dp'] = df['Dp'].str.upper()
     df['CC'] = df['CC'].str.upper()
 
-    # Add list size to columns
-    # read in only relevant columns, list size, div, practice (columns in F and G are the ones being read in)
-    list_size_table = pd.read_excel(input_file, sheet_name = 'list_size', skiprows = 4, usecols = [3,4,6,7])
+    # Read in relevant list size data
+    list_size_table = pd.read_excel(input_file, sheet_name='list_size', skiprows=4, usecols=[3,4,6,7])
 
-    # create division map for weighted and raw
-    # first create dict for unique divs
+    # Create a list of unique divisions
     divisions = list_size_table['Div'].unique()
 
     div_list_size_weighted = {}
     div_list_size_raw = {}
-    
+
     for index,row in list_size_table.iterrows():
         division = row[1]
         weighted = row[2]
         raw = row[3]
-        
+
         if division in div_list_size_weighted:
             div_list_size_weighted[division] += weighted
             div_list_size_raw[division] += raw
         else:
             div_list_size_weighted[division] = weighted
             div_list_size_raw[division] = raw
-    
+
     df['Divisional_Weighted_List_Size'] = df['Dp'].map(div_list_size_weighted)
     df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
 
@@ -66,17 +64,17 @@ def clean_budget(input_file):
     df['Practice_Weighted_List_Size'] = df['Dp'].map(prac_list_size_weighted)
     df['Practice_Raw_List_Size'] = df['Dp'].map(prac_list_size_raw)
 
-    # Creating YTD/1000 columns
-    df["YTD_Divisional_Raw_1000"] = 1000*df['YTD']/df['Divisional_Raw_List_Size']
-    df["YTD_Divisional_Weighted_1000"] = 1000*df['YTD']/df['Divisional_Weighted_List_Size']
-    df["YTD_Practice_Weighted_1000"] = 1000*df['YTD']/df['Practice_Weighted_List_Size']
-    df["YTD_Practice_Raw_1000"] = 1000*df['YTD']/df['Practice_Raw_List_Size']
+    # Create YTD/1000 columns
+    df["YTD_Divisional_Raw_1000"] = 1000 * df['YTD'] / df['Divisional_Raw_List_Size']
+    df["YTD_Divisional_Weighted_1000"] = 1000 * df['YTD'] / df['Divisional_Weighted_List_Size']
+    df["YTD_Practice_Weighted_1000"] = 1000 * df['YTD'] / df['Practice_Weighted_List_Size']
+    df["YTD_Practice_Raw_1000"] = 1000 * df['YTD'] / df['Practice_Raw_List_Size']
 
-    # Creating Period/1000 columns
-    df["Period_Divisional_Raw_1000"] = 1000*df['Period']/df['Divisional_Raw_List_Size']
-    df["Period_Divisional_Weighted_1000"] = 1000*df['Period']/df['Divisional_Weighted_List_Size']
-    df["Period_Practice_Weighted_1000"] = 1000*df['Period']/df['Practice_Weighted_List_Size']
-    df["Period_Practice_Raw_1000"] = 1000*df['Period']/df['Practice_Raw_List_Size']
+    # Create Period/1000 columns
+    df["Period_Divisional_Raw_1000"] = 1000 * df['Period'] / df['Divisional_Raw_List_Size']
+    df["Period_Divisional_Weighted_1000"] = 1000 * df['Period'] / df['Divisional_Weighted_List_Size']
+    df["Period_Practice_Weighted_1000"] = 1000 * df['Period'] / df['Practice_Weighted_List_Size']
+    df["Period_Practice_Raw_1000"] = 1000 * df['Period'] / df['Practice_Raw_List_Size']
 
     # Rename columns from csv_name to bq_name
     columns_rename = {entry['csv_name']:entry['bq_name'] for entry in budget_metadata}
@@ -84,16 +82,15 @@ def clean_budget(input_file):
 
     # Create list of required columns that appear in metadata.json
     required_columns = [entry['bq_name'] for entry in budget_metadata]
-    
+
     for column in df.columns:
         if column not in required_columns:
               df = df.drop(column, axis=1)
 
     # Sort DataFrame
     df = df.sort_values('Date', ignore_index=True)
-    
+
     return df
-#clean_budget('MODGRP - June 20 TB data.xlsx')
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""
@@ -103,14 +100,14 @@ def clean_econsult_activity(input_file):
         data = json.load(json_file)
         usage_metadata = data['Usage']
         reason_metadata = data['Reason']
-    
+
     with open("practice_lookup.json") as json_file:
         practice_lookup = json.load(json_file)
 
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes_usage = {entry['csv_name']:entry['pd_dtype'] for entry in usage_metadata if entry['csv_name'] != None}
     pd_dtypes_reason = {entry['csv_name']:entry['pd_dtype'] for entry in reason_metadata if entry['csv_name'] != None}
-    
+
     # Read in each excel sheet to separate DataFrames from the eConsult file
     usage_df = pd.read_excel(input_file, sheet_name='Usage', skiprows=21, dtype=pd_dtypes_usage)
     reason_df = pd.read_excel(input_file, sheet_name='All Consults', dtype=pd_dtypes_reason)
@@ -131,12 +128,12 @@ def clean_econsult_activity(input_file):
     divisional_list_size_lookup = {}
     for division in unique_divisions:
         for entry in practice_lookup:
-            if entry['DIV'] == division: 
+            if entry['DIV'] == division:
                 if division not in divisional_list_size_lookup:
                     divisional_list_size_lookup[division] = list_size_lookup[entry['ODS Code']]
-                else: 
+                else:
                     divisional_list_size_lookup[division] += list_size_lookup[entry['ODS Code']]
-    
+
     # Add Division and Practice Code columns to Reason DataFrame
     reason_df['DIV'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['DIV'] for entry in practice_lookup})
     reason_df['Code'] = reason_df['ODS Code'].map({entry['ODS Code']:entry['practice_code'] for entry in practice_lookup})
@@ -147,7 +144,7 @@ def clean_econsult_activity(input_file):
 
     # Add age bracket column to reason dataframe
     reason_df['Age_Bracket'] = reason_df['Age'].apply(age_bracket)
-    
+
     # Reason per 1000 eConsults per divisional and practice list size
     reason_df['eConsult_1000_division'] = 1000 / reason_df['Div_List']
     reason_df['eConsult_1000_practice'] = 1000 / reason_df['List_Size']
@@ -171,7 +168,7 @@ def clean_econsult_activity(input_file):
 
     # eConsults submitted per 1000 per practice List Size
     usage_df['eConsults_submitted_1000'] =(usage_df['eConsults submitted']/usage_df['List_Size'])*1000
-    
+
     # Create Week_Month column in Date format
     usage_df['Week_Month'] = reason_df['Date'][0]
 
@@ -193,14 +190,14 @@ def clean_econsult_activity(input_file):
     return usage_df, reason_df
 
 def clean_econsult_survey(input_file):
-    """Cleans monthly eConsult patient feedback data. File to be uploaded monthly."""    
+    """Cleans monthly eConsult patient feedback data. File to be uploaded monthly."""
 
     class FeedbackQuestion:
         """Creates object containing a question (string) and question data (dataframe)."""
-        
+
         def __init__(self, df):
             self.question = df.iloc[0][0]
-            
+
             if len(df.index) > 1:
                 header = df.iloc[1]
                 df = df[2:]
@@ -222,7 +219,7 @@ def clean_econsult_survey(input_file):
         def remove_grandtotal(self):
             """Removes Grand Total rows from each question sub-dataframe"""
             self.data = self.data[self.data.Practice != "Grand Total"]
-    
+
     with open("metadata.json") as json_file:
         data = json.load(json_file)
         survey_metadata = data['']
@@ -258,12 +255,12 @@ def clean_econsult_survey(input_file):
 
         # Create question instance
         question = FeedbackQuestion(df)
-        
+
         # Skip current iteration of loop if there is no data
         if question.data is None:
             continue
 
-        # Stack question responses into rows  
+        # Stack question responses into rows
         question.stack_responses()
 
         # Remove 'Grand Total' row from each question
@@ -273,7 +270,7 @@ def clean_econsult_survey(input_file):
         question.data['Question'] = question.question
         question.data['DIV'] = question.data['Practice'].map({entry['practice_name']:entry['DIV'] for entry in practice_lookup})
         question.data['Practice_Code'] = question.data['Practice'].map({entry['practice_name']:entry['practice_code'] for entry in practice_lookup})
-        
+
         # Append each question to the combined data frame.
         full_df = full_df.append(question.data)
 
@@ -292,17 +289,17 @@ def clean_econsult_survey(input_file):
     return full_df
 
 def clean_econsult_comments(input_file):
-    
+
     class IndividualPracticeComments:
         """Creates object containing practice name and a DataFrame of patient comments."""
-        
+
         def __init__(self, df):
-            
+
             df.dropna(axis=0, how='all', inplace=True)
             df.dropna(axis=1, how='all', inplace=True)
-            
+
             self.name = df.iloc[0][0]
-            
+
             if len(df.index) > 0:
                 df = df[1:]
                 df.reset_index(drop=True, inplace=True)
@@ -335,7 +332,7 @@ def clean_econsult_comments(input_file):
     full_df = pd.DataFrame()
 
     for df in patient_comment_df_list:
-        # Create practice comment instance for each 
+        # Create practice comment instance for each
         practice = IndividualPracticeComments(df)
 
         if practice.data is None:

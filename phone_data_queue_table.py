@@ -128,15 +128,22 @@ def queing_table(input_file):
     df_queue['date'] = datetime.strptime(f'01/{month}/{year}', '%d/%B/%Y')
     return df_queue
 
-def phone__data_clean(input_file):
+def phone_data_clean(input_file):
     #read data in 
     df = pd.read_csv(input_file)
     
     df['Call_Dropped'] = 0
-    df = df.groupby('Call_ID')
+    df_grouped = df.groupby('Call_ID')
 
-    for name,group in df:
+    indexs_calls_dropped = []
+    for name,group in df_grouped:
         if "IVR Enter" in group["Event type"].unique() and "Answer ACD" not in group["Event type"].unique():
-                group['Call_Dropped'][group["Event type"] == "IVR Enter"] = 1
+            index = df.index[(df['Call_ID'] == name) & (df['Event type'] == "IVR Enter")]
+            indexs_calls_dropped.append(index[0])
 
-# phone__data_clean('phone_data_clean.csv')
+    df.loc[indexs_calls_dropped,"Call_Dropped"] = 1
+phone_data_clean("phone_data_clean.csv")
+
+# df = queing_table('phone_data_clean.csv')
+# print(df)
+# df.to_csv("phone_queuing_table.csv", index=False)

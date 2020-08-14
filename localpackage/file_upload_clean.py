@@ -39,6 +39,14 @@ def clean_budget(input_file):
     # Read in relevant list size data
     list_size_table = pd.read_excel(input_file, sheet_name=1, skiprows=4, usecols=[3,4,6,7])
 
+    # Strip whitespace from list size column headers
+    list_size_table.columns = list_size_table.columns.str.strip()
+
+    # Split each patient feedback question into individual dataframes
+    list_size_table = np.split(list_size_table, list_size_table[list_size_table.isnull().all(1)].index)[0]
+
+    print(list_size_table.head())
+
     # Create a list of unique divisions
     divisions = list_size_table['Div'].unique()
 
@@ -95,7 +103,8 @@ def clean_budget(input_file):
 
     return df
 
-clean_budget()
+clean_budget("data/Finance/MODGRP - April 20 TB data.xlsx")
+
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""

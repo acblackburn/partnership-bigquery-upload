@@ -12,11 +12,14 @@ def clean_budget(input_file):
         data = json.load(json_file)
         budget_metadata = data['Budget']
 
+    # Required columns to read into df
+    required_input_cols = [entry['csv_name'] for entry in budget_metadata if entry['csv_name'] != None]
+
     # Create dictionary for the panda type that the excel/csv file should be loaded as
     pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
 
     df = pd.read_excel(
-        input_file, dtype=pd_dtypes, na_values=' -   ', thousands=','
+        input_file, usecols=required_input_cols, dtype=pd_dtypes, na_values=' -   ', thousands=','
         )
 
     # Remove empty rows
@@ -91,6 +94,8 @@ def clean_budget(input_file):
     df = df.sort_values('Date', ignore_index=True)
 
     return df
+
+clean_budget()
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""

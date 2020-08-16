@@ -45,7 +45,7 @@ def clean_budget(input_file):
     # Split each patient feedback question into individual dataframes
     list_size_table = np.split(list_size_table, list_size_table[list_size_table.isnull().all(1)].index)[0]
 
-    print(list_size_table.head())
+    print(list_size_table.tail())
 
     # Create a list of unique divisions
     divisions = list_size_table['Div'].unique()

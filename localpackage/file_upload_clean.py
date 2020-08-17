@@ -82,7 +82,7 @@ def clean_budget(input_file):
     df['Practice_Weighted_List_Size'] = df['CC'].map(prac_list_size_weighted, na_action=None)
     df['Practice_Raw_List_Size'] = df['CC'].map(prac_list_size_raw, na_action=None)
 
-    print(df['Practice_Raw_List_Size'].value_counts())
+    # print(df['Practice_Raw_List_Size'].value_counts())
 
     # Create YTD/1000 columns
     df["YTD_Divisional_Raw_1000"] = 1000 * df['YTD'] / df['Divisional_Raw_List_Size']

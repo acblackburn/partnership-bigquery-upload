@@ -74,13 +74,15 @@ def clean_budget(input_file):
     df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
 
     # For practice map all practices from the table
-    prac_list_size_weighted = pd.Series(list_size_table['Weighted'],index=list_size_table['Cost code']).to_dict()
-    prac_list_size_raw = pd.Series(list_size_table['Raw'],index=list_size_table['Cost code']).to_dict()
+    prac_list_size_weighted = pd.Series(list_size_table['Weighted'].values, index=list_size_table['Cost code']).to_dict()
+    prac_list_size_raw = pd.Series(list_size_table['Raw'].values, index=list_size_table['Cost code']).to_dict()
 
-    print(prac_list_size_raw)
+    # print(prac_list_size_weighted)
 
-    df['Practice_Weighted_List_Size'] = df['Dp'].map(prac_list_size_weighted)
-    df['Practice_Raw_List_Size'] = df['Dp'].map(prac_list_size_raw)
+    df['Practice_Weighted_List_Size'] = df['CC'].map(prac_list_size_weighted, na_action=None)
+    df['Practice_Raw_List_Size'] = df['CC'].map(prac_list_size_raw, na_action=None)
+
+    print(df['Practice_Raw_List_Size'].value_counts())
 
     # Create YTD/1000 columns
     df["YTD_Divisional_Raw_1000"] = 1000 * df['YTD'] / df['Divisional_Raw_List_Size']
@@ -111,7 +113,7 @@ def clean_budget(input_file):
     return df
 
 test_df = clean_budget("data/Finance/MODGRP - April 20 TB data.xlsx")
-# test_df.to_csv("~/Desktop/April_finance_test.csv")
+test_df.to_csv("~/Desktop/April_finance_test.csv")
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""

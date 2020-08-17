@@ -45,6 +45,10 @@ def clean_budget(input_file):
     # Split each patient feedback question into individual dataframes
     list_size_table = np.split(list_size_table, list_size_table[list_size_table.isnull().all(1)].index)[0]
 
+    # Make sure Division and Cost code columns are uppercase
+    list_size_table['Div'] = list_size_table['Div'].str.upper()
+    list_size_table['Cost code'] = list_size_table['Cost code'].str.upper()
+
     print(list_size_table.tail())
 
     # Create a list of unique divisions

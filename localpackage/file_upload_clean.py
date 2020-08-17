@@ -42,14 +42,12 @@ def clean_budget(input_file):
     # Strip whitespace from list size column headers
     list_size_table.columns = list_size_table.columns.str.strip()
 
-    # Split each patient feedback question into individual dataframes
+    # Split each patient feedback question into individual DataFrames
     list_size_table = np.split(list_size_table, list_size_table[list_size_table.isnull().all(1)].index)[0]
 
     # Make sure Division and Cost code columns are uppercase
     list_size_table['Div'] = list_size_table['Div'].str.upper()
     list_size_table['Cost code'] = list_size_table['Cost code'].str.upper()
-
-    print(list_size_table.tail())
 
     # Create a list of unique divisions
     divisions = list_size_table['Div'].unique()
@@ -62,12 +60,15 @@ def clean_budget(input_file):
         weighted = row[2]
         raw = row[3]
 
+        if pd.isnull(raw):
+            continue
+
         if division in div_list_size_weighted:
             div_list_size_weighted[division] += weighted
-            div_list_size_raw[division] += raw
+            div_list_size_raw[division] += int(raw)
         else:
             div_list_size_weighted[division] = weighted
-            div_list_size_raw[division] = raw
+            div_list_size_raw[division] = int(raw)
 
     df['Divisional_Weighted_List_Size'] = df['Dp'].map(div_list_size_weighted)
     df['Divisional_Raw_List_Size'] = df['Dp'].map(div_list_size_raw)
@@ -75,6 +76,8 @@ def clean_budget(input_file):
     # For practice map all practices from the table
     prac_list_size_weighted = pd.Series(list_size_table['Weighted'],index=list_size_table['Cost code']).to_dict()
     prac_list_size_raw = pd.Series(list_size_table['Raw'],index=list_size_table['Cost code']).to_dict()
+
+    print(prac_list_size_raw)
 
     df['Practice_Weighted_List_Size'] = df['Dp'].map(prac_list_size_weighted)
     df['Practice_Raw_List_Size'] = df['Dp'].map(prac_list_size_raw)
@@ -107,8 +110,8 @@ def clean_budget(input_file):
 
     return df
 
-clean_budget("data/Finance/MODGRP - April 20 TB data.xlsx")
-
+test_df = clean_budget("data/Finance/MODGRP - April 20 TB data.xlsx")
+# test_df.to_csv("~/Desktop/April_finance_test.csv")
 
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""

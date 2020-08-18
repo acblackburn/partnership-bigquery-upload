@@ -7,23 +7,23 @@ def main(data, context):
     file_path, file_name = data_file_info(data['name'])
 
     # Only applies if uploaded file is either csv or excel
-    if data['contentType'] in ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]:
+    # if data['contentType'] in ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]:
 
-        if file_path == "Budget":
-            df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
-            df_to_gbq(df_budget, "Finance", "Budget2")
-        elif file_path == "eConsult/Activity":
-            df_usage, df_reason = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
-            df_to_gbq(df_usage, "eConsult", "Usage")
-            df_to_gbq(df_reason, "eConsult", "Reason")
-        elif file_path == "eConsult/Patient_Survey":
-            df_activity = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
-            df_to_gbq(df_activity, "eConsult", "patient_feedback_response")
-        elif file_path == "eConsult/Patient_Comments":
-            df_comments = fc.clean_econsult_comments(f"gs://{data['bucket']}/{data['name']}")
-            df_to_gbq(df_comments, "eConsult", "patient_feedback_comments")
+    if file_path == "Budget":
+        df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_budget, "Finance", "Budget2")
+    elif file_path == "eConsult/Activity":
+        df_usage, df_reason = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_usage, "eConsult", "Usage")
+        df_to_gbq(df_reason, "eConsult", "Reason")
+    elif file_path == "eConsult/Patient_Survey":
+        df_activity = fc.clean_econsult_activity(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_activity, "eConsult", "patient_feedback_response")
+    elif file_path == "eConsult/Patient_Comments":
+        df_comments = fc.clean_econsult_comments(f"gs://{data['bucket']}/{data['name']}")
+        df_to_gbq(df_comments, "eConsult", "patient_feedback_comments")
 
-        delete_blob(data['bucket'], data['name'])
+    delete_blob(data['bucket'], data['name'])
 
 # def main():
 #     data = "phone_data_clean.csv"

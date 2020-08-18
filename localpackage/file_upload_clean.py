@@ -112,9 +112,6 @@ def clean_budget(input_file):
 
     return df
 
-test_df = clean_budget("data/Finance/MODGRP - April 20 TB data.xlsx")
-test_df.to_csv("~/Desktop/April_finance_test.csv")
-
 def clean_econsult_activity(input_file):
     """Cleans weekly eConsult activity data. File to be uploaded weekly."""
 

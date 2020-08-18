@@ -7,7 +7,8 @@ def main(data, context):
     file_path, file_name = data_file_info(data['name'])
 
     # Only applies if uploaded file is either csv or excel
-    # if data['contentType'] in ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]:
+    if data['contentType'] == "text/plain":
+        continue
 
     if file_path == "Budget":
         df_budget = fc.clean_budget(f"gs://{data['bucket']}/{data['name']}")
@@ -26,9 +27,9 @@ def main(data, context):
     delete_blob(data['bucket'], data['name'])
 
 # def main():
-#     data = "phone_data_clean.csv"
-#     df_queue = queing_table(data)
-#     df_to_gbq(df_queue, "phone_data", "queing_table")
-
+#     data = "data/MODGRP - April 20 TB data.xlsx"
+#     df_budget = fc.clean_budget(data)
+#     df_to_gbq(df_queue, "Finance", "Budget2")
+#
 # if __name__ == "__main__":
 #     main()

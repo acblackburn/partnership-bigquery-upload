@@ -6,14 +6,14 @@ import json
 def df_to_gbq(df, dataset, table_name):
     """Load a pandas DataFrame into a specified BigQuery table."""
     bq_client = bigquery.Client(project="modalitydashboards")
-    table_id = f"modalitydashboards.{dataset}.{table_name}"
+    table_id = f"modalitydashboards.{dataset}.Budget2"
 
     # Open and load json metadata file
     with open("metadata.json") as json_file:
         data = json.load(json_file)
-        metadata = data[table_name]
+        metadata = data["Budget"]
 
-    # Create BigQuery schema from json metadata 
+    # Create BigQuery schema from json metadata
     schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in metadata if entry['bq_name'] != None]
 
     job_config = bigquery.LoadJobConfig(schema=schema)

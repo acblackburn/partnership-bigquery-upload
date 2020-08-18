@@ -42,7 +42,7 @@ def factorial(n):
     return fact
 
 def queing_table(input_file):
-    #read data in 
+    #read data in
     df = pd.read_csv(input_file)
 
     #set capacity from 1-10
@@ -65,37 +65,37 @@ def queing_table(input_file):
     for name, group in df:
         #choose which hour the call falls into (chosen the time of answer)
         hour =(group['Start time'][group['Event type'] == "Answer ACD"]).dt.hour.values
-        
+
         #ignores callls that have no answer
         if len(hour) == 0:
             continue
         else:
             hour = hour[0]
-        
+
         #calculates arrival rates
         arrival_rate[hour] += (1/no_days)
-    
+
     #finding waiting and service time
     for name, group in df:
         #choose which hour the call falls into (chosen the time of answer)
         hour =(group['Start time'][group['Event type'] == "Answer ACD"]).dt.hour.values
-        
+
         #ignores callls that have no answer
         if len(hour) == 0:
             continue
         else:
             hour = hour[0]
-        
+
         #calculates wating time, taken as ringing and time in queue
         wating_time_sum = 0
         queue = group['Duration'][group['Event type'] == "In Queue"]
         ringing = group['Duration'][group['Event type'] == "Ringing"]
         waiting_time_sum = sum(queue.values) + sum(ringing.values)
         waiting_time[hour] += (((waiting_time_sum.astype('timedelta64[ns]')) / np.timedelta64(1, 'h')))/(no_days*arrival_rate[hour])
-        
+
         #calculates time on call, answer ACD
         service_time[hour] += (sum((group['Duration'][group['Event type'] == "Answer ACD"]).values).astype('timedelta64[ns]') / np.timedelta64(1, 'h'))/(no_days*arrival_rate[hour])
-    
+
     #create an empty list to be added with dictionary values for df
     rows_df = []
     #using calculations to find waiting times and utilisation rates
@@ -119,7 +119,7 @@ def queing_table(input_file):
                 #creating timestamp from hour
                 hour_timestamp = f"{str(hour)}:00:00"
                 #creating dictionary values
-                dict_add = {'hour':hour_timestamp, 'capacity':c, 'utilisation_rate': rho, 'idle_rate': (1-rho), 'calc_waiting_time': (w_q*60), 
+                dict_add = {'hour':hour_timestamp, 'capacity':c, 'utilisation_rate': rho, 'idle_rate': (1-rho), 'calc_waiting_time': (w_q*60),
                             'avg_waiting_time':(waiting_time[hour]*60), 'arrival_rate': lambda_hour, 'service_rate_hour': mew}
                 rows_df.append(dict_add)
     month = 'June'
@@ -129,9 +129,9 @@ def queing_table(input_file):
     return df_queue
 
 def phone_data_clean(input_file):
-    #read data in 
+    #read data in
     df = pd.read_csv(input_file)
-    
+
     df['Call_Dropped'] = 0
     df_grouped = df.groupby('Call_ID')
 
@@ -142,7 +142,6 @@ def phone_data_clean(input_file):
             indexs_calls_dropped.append(index[0])
 
     df.loc[indexs_calls_dropped,"Call_Dropped"] = 1
-phone_data_clean("phone_data_clean.csv")
 
 # df = queing_table('phone_data_clean.csv')
 # print(df)

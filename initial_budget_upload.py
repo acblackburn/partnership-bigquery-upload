@@ -13,7 +13,6 @@ with open("metadata.json") as json_file:
 # Create dictionary for the panda type that the excel/csv file should be loaded as
 pd_dtypes = {entry['csv_name']:entry['pd_dtype'] for entry in budget_metadata if entry['csv_name'] != None}
 
-
 df = pd.read_excel("~/Desktop/Budgetv1.xlsx", dtype=pd_dtypes, na_values=' -   ', thousands=',')
 
 # Remove empty rows

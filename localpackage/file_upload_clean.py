@@ -37,7 +37,7 @@ def clean_budget(input_file):
     df['CC'] = df['CC'].str.upper()
 
     # Read in relevant list size data
-    list_size_table = pd.read_excel(input_file, sheet_name="ListSize", skiprows=4, usecols=[3,4,6,7])
+    list_size_table = pd.read_excel(input_file, sheet_name=1, skiprows=4, usecols=[3,4,6,7])
 
     # Strip whitespace from list size column headers
     list_size_table.columns = list_size_table.columns.str.strip()

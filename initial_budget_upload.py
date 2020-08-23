@@ -60,10 +60,8 @@ for column in df.columns:
 # Sort DataFrame
 df = df.sort_values('Date', ignore_index=True)
 
-print(df.dtypes)
-
 bq_client = bigquery.Client(project="modalitydashboards")
-table_id = f"modalitydashboards.Finance.Budget2"
+table_id = f"modalitydashboards.Finance.Budget"
 
 # Create BigQuery schema from json metadata
 schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in budget_metadata if entry['bq_name'] != None]

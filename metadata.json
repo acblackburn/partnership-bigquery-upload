@@ -335,11 +335,12 @@
       "bq_name": null,
       "bq_dtype": null
     },
-    {"description": "[DESCRIPTION]",
-    "csv_name": "Practice Type",
-    "pd_dtype": "str",
-    "bq_name": null,
-    "bq_dtype": null
+    {
+      "description": "[DESCRIPTION]",
+      "csv_name": "Practice Type",
+      "pd_dtype": "str",
+      "bq_name": null,
+      "bq_dtype": null
     },
     {
       "description": "[DESCRIPTION]",

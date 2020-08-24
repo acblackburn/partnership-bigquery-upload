@@ -11,7 +11,7 @@ def df_to_gbq(df, dataset, table_name):
     # Open and load json metadata file
     with open("metadata.json") as json_file:
         data = json.load(json_file)
-        metadata = data["Budget"]
+        metadata = data[table_name]
 
     # Create BigQuery schema from json metadata
     schema = [bigquery.SchemaField(entry['bq_name'], entry['bq_dtype']) for entry in metadata if entry['bq_name'] != None]

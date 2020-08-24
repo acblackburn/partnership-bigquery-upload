@@ -25,11 +25,3 @@ def main(data, context):
         df_to_gbq(df_comments, "eConsult", "patient_feedback_comments")
 
     delete_blob(data['bucket'], data['name'])
-
-# def main():
-#     data = "data/MODGRP - April 20 TB data.xlsx"
-#     df_budget = fc.clean_budget(data)
-#     df_to_gbq(df_queue, "Finance", "Budget2")
-#
-# if __name__ == "__main__":
-#     main()

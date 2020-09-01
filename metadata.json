@@ -587,6 +587,7 @@
       "bq_dtype": "STRING"
     }
   ],
+
   "queing_table": [
     {
       "description": "[DESCRIPTION]",
@@ -651,5 +652,181 @@
       "bq_name": "idle_rate",
       "bq_dtype": "FLOAT"
     }
-  ]
+  ],
+
+  "practice_level_data": [
+    {
+        "bq_name": "Year",
+        "bq_dtype": "DATE"
+    },
+    {
+        "bq_name": "DIV",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Practice_Code",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Question",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Response",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Combined_Question",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Combined_Response",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Value",
+        "bq_dtype": "FLOAT"
+    },
+    {
+        "bq_name": "Grouped",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "ODS_Code",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Question_String",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Response_String",
+        "bq_dtype": "STRING"
+    },
+    {
+        "bq_name": "Year",
+        "bq_dtype": "DATE"
+    }
+    ],
+
+    "response_rates": [
+        {
+            "bq_name": "ODS_Code",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "resprate",
+            "bq_dtype": "FLOAT"
+        },
+        {
+            "bq_name": "distributed",
+            "bq_dtype": "INTEGER"
+        },
+        {
+            "bq_name": "received",
+            "bq_dtype": "INTEGER"
+        },
+        {
+            "bq_name": "perc_resprate",
+            "bq_dtype": "FLOAT"
+        },
+        {
+            "bq_name": "DIV",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Practice_Code",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Year",
+            "bq_dtype": "DATE"
+        }
+    ],
+
+    "ccg_level_data": [
+        {
+            "bq_name": "CCG_Code",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "CCG_Name",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Question",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Response",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Combined_Question",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Value",
+            "bq_dtype": "FLOAT"
+        },
+        {
+            "bq_name": "Year",
+            "bq_dtype": "DATE"
+        },
+        {
+            "bq_name": "Combined_Response",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Question_String",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Response_String",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Grouped",
+            "bq_dtype": "STRING"
+        }
+    ],
+    
+    "nat_level_data": [
+        {
+            "bq_name": "Question",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Response",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Combined_Question",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Value",
+            "bq_dtype": "FLOAT"
+        },
+        {
+            "bq_name": "Year",
+            "bq_dtype": "DATE"
+        },
+        {
+            "bq_name": "Combined_Response",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Question_String",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Response_String",
+            "bq_dtype": "STRING"
+        },
+        {
+            "bq_name": "Grouped",
+            "bq_dtype": "STRING"
+        }
+    ]
 }

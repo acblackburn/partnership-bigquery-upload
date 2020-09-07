@@ -37,10 +37,10 @@ for df in df_list:
         header = call_data.iloc[0]
         call_data = call_data.iloc[1:]
         call_data.columns = header
-        
+
         # Remove index name
         call_data.columns.name = None
-        
+
         # Add 'Call_Direction' and 'Location' columns
         call_data['Call_direction'] = call_info[8]
         call_data['Location'] = call_info[14]
@@ -61,7 +61,12 @@ for df in df_list:
             }
 
         call_data = pd.concat([pd.DataFrame(new_row), call_data], ignore_index=True)
-        
+
+        if 'Answer ACD' in call_data['Event type'].values:
+            call_data['Call_Dropped'] = 0
+        else:
+            call_data['Call_Dropped'] = 1
+
         # Append each call DataFrame to the full DataFrame
         full_df = full_df.append(call_data)
 
@@ -73,7 +78,7 @@ full_df.reset_index(drop=True, inplace=True)
 full_df.columns = full_df.columns.str.replace(' ', '_')
 
 
-# # full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
+full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
 
 # bq_client = bigquery.Client(project="modalitydashboards")
 # table_id = f"modalitydashboards.phone_data.example_month"

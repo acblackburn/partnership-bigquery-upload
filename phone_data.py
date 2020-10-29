@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import xlrd
@@ -80,8 +81,10 @@ full_df.columns = full_df.columns.str.replace(' ', '_')
 
 # full_df.to_csv("~/Desktop/phone_data_clean.csv", index=False)
 
-bq_client = bigquery.Client(project="modalitydashboards")
-table_id = f"modalitydashboards.phone_data.example_month"
+project = os.environ.get("BQ_PROJECT")
+
+bq_client = bigquery.Client(project=project)
+table_id = f"{project}.phone_data.example_month"
 
 schema = [
     bigquery.SchemaField("Start_time", "TIMESTAMP"),

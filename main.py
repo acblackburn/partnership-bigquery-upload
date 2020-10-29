@@ -7,10 +7,6 @@ def main(data, context):
 
     file_path, file_name = data_file_info(data['name'])
 
-    # Only applies if uploaded file is either csv or excel
-    # if data['contentType'] == "text/plain":
-    #     continue
-
     if file_path == "Budget":
         df_budget = clean_budget(f"gs://{data['bucket']}/{data['name']}")
         df_to_gbq(df_budget, "Finance", "Budget")

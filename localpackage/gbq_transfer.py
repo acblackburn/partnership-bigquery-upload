@@ -5,8 +5,9 @@ import json
 
 def df_to_gbq(df, dataset, table_name):
     """Load a pandas DataFrame into a specified BigQuery table."""
-    bq_client = bigquery.Client(project="modalitydashboards")
-    table_id = f"modalitydashboards.{dataset}.{table_name}"
+    project = os.environ.get("BQ_PROJECT")
+    bq_client = bigquery.Client(project=project)
+    table_id = f"{project}.{dataset}.{table_name}"
 
     # Open and load json metadata file
     with open("metadata.json") as json_file:

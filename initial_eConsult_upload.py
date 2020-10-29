@@ -62,6 +62,3 @@ def initial_usage_upload(input_file):
 
     job.result()
     json_file.close()
-
-initial_usage_upload('data/econsult_usage.xlsx')
-initial_reason_upload('data/econsult_reason.xlsx')
